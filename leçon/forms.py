@@ -1,5 +1,5 @@
 from django import forms
-from .models import Lesson
+from .models import Lesson,Url
 
 
 class LessonForm(forms.ModelForm):
@@ -19,3 +19,12 @@ class LessonForm(forms.ModelForm):
         self.fields['order'].widget.attrs={'class':'form-control','placeholder': 'Order'}
         self.fields['remarques'].widget.attrs={'class':'form-control','placeholder': 'Remarques'}
         self.fields['state'].widget.attrs={'class':'switchery'}
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Url
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(VideoForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
+        self.fields['video'].widget.attrs={'class':'form-control','placeholder': 'video'}

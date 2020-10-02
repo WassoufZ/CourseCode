@@ -1,0 +1,14 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% block title %} Leçon {% endblock %}
+
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+
+<li class="active">{% trans "Ajouter Un Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+
+{% endblock content_area %}

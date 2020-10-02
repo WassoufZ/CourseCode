@@ -90,7 +90,7 @@
 												<div class="row">
 													<div class="col-md-1">
 														<div class="form-group">
-															</div>
+														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
@@ -104,7 +104,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-link"
 														data-dismiss="modal">Close</button>
-													<button type="submit" class="btn btn-primary">Save</button>
+													<button type="submit" class="btn btn-primary" name="LessonForm">Save</button>
 												</div>
 										</form>
 									</div>
@@ -220,29 +220,73 @@
 
 						<div class="tab-content">
 							<div class="tab-pane active" id="highlighted-justified-tab1">
-								active one
+								<!-- Inside page title -->
+										<div class="page-header-content">
+											<div>
+												<h6>
+													videos list:
+												</h6>
+											</div>
+											<div class="heading-elements">
+												<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+													href="{% url 'add_lesson_video' lesson.id %}"><i class="icon-add position-left"></i> Ajouter </a>
+											</div>
+										</div><hr>			
+								<!-- /inside page title -->
 							</div>
 
 							<div class="tab-pane" id="highlighted-justified-tab2">
-								Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid
-								laeggin.
+								<!-- Inside page title -->
+								<div class="page-header-content">
+									<div>
+										<h6>
+											Documents list:
+										</h6>
+									</div>
+									<div class="heading-elements">
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+									</div>
+								</div><hr>			
+						<!-- /inside page title -->
 							</div>
 
 							<div class="tab-pane" id="highlighted-justified-tab3">
-								DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg
-								whatever.
+								<!-- Inside page title -->
+								<div class="page-header-content">
+									<div>
+										<h6>
+											Images list:
+										</h6>
+									</div>
+									<div class="heading-elements">
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+									</div>
+								</div><hr>			
+						<!-- /inside page title -->
 							</div>
 
 							<div class="tab-pane" id="highlighted-justified-tab4">
-								Aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore
-								aesthet.
+								<!-- Inside page title -->
+								<div class="page-header-content">
+									<div>
+										<h6>
+											Urls list:
+										</h6>
+									</div>
+									<div class="heading-elements">
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+									</div>
+								</div><hr>			
+						<!-- /inside page title -->
 							</div>
 						</div>
 
 					</div>
 				</div>
 			</div>
-			<!-- /highlighted tabs -->
 		</div>
 	</div>
 	<!-- /vertical form -->

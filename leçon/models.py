@@ -22,7 +22,7 @@ class Video(models.Model):
     title = models.CharField(max_length=200)
     video = models.FileField()
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Image(models.Model):
