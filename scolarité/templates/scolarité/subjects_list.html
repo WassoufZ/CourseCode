@@ -1,0 +1,69 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% block title %} Scolarité {% endblock %}
+{% block page_title %}Gestion des matières scolaires{% endblock %}
+
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "subjects_list" %}">{% trans "Gestion des matières scolaires " %} </a></li>
+{% endblock %}
+
+{% block content_area %}
+
+<div class="row">
+	<div class="col-md-12">		
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h4 class="panel-title">{% trans "Liste des matiéres" %} </h4>
+				<div class="heading-elements">
+		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
+		        	href="" 
+		            ><i class="icon-add position-left "></i> {% trans "Ajouter" %}</a>	        	
+		    	</div>
+			</div>				
+		</div>
+	</div>
+</div>
+<!-- Grid list -->
+<div class="row">
+{% for subject in subjects_list %}
+	<div class="col-lg-3 col-sm-6">
+		<div class="panel panel-flat">
+			<div class="panel-body text-center">
+				<a href="" class="display-inline-block">
+					{% load static %}
+					<img src="{% static "img/subject.svg"%}" class="img-circle img-responsive" alt="" style="width: 120px; height: 120px;">
+				</a>
+
+				<h6 class="text-semibold no-margin-bottom">
+					<a href="#" class="text-default">{{subject.name}} - {{subject.name_arabic}}</a>
+					<small class="display-block">{{subject.name_arabic}}</small>
+				</h6>
+				<!--h6 class="no-margin  text-muted">50 élèves</h6-->
+			</div>
+
+			<div class="panel-footer text-center no-padding">
+		    	<div class="row">
+		    		<div class="col-xs-12">
+		    			<a href=""
+		    			 class="display-block p-10 text-default" data-popup="tooltip" data-placement="bottom" data-container="body" title="" data-original-title="Consulter">Ajouter les leçons<i class="icon-search4"></i></a>
+		    		</div>
+
+		    		<!--div class="col-xs-4">
+		    			<a href="" class="display-block p-10 text-default" data-popup="tooltip" data-placement="bottom" data-container="body" title="" data-original-title="Modifier"><i class="icon-pencil7"></i></a>
+		    		</div>
+					<div class="col-xs-4">
+		    			<a href="" class="display-block p-10 text-default" data-popup="tooltip" data-placement="bottom" data-container="body" title="" data-original-title="Supprimer"><i class="icon-trash"></i></a>
+		    		</div-->
+		    	</div>
+			</div>
+		</div>
+	</div>
+	{% if forloop.counter|divisibleby:4 %}
+ 		</div><div class="row">
+ {% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{% load i18n %}
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="{% static "img/logo.png" %}" type="image/png">
+	<title>{% trans "  Login " %} </title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Amiri|Cairo" rel="stylesheet">
+	<link href="static/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="static/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="static/assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="static/assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="static/assets/css/colors.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Custom stylesheets -->
+	<link href="{% static "css/custom.css" %}" rel="stylesheet" type="text/css">
+	<!-- /Custom stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="static/assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="static/assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="static/assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="static/assets/js/plugins/loaders/blockui.min.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="static/assets/js/plugins/forms/validation/validate.min.js"></script>
+	<script type="text/javascript" src="static/assets/js/plugins/forms/styling/uniform.min.js"></script>
+
+	<script type="text/javascript" src="static/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="static/assets/js/pages/login_validation.js"></script>
+
+	<script type="text/javascript" src="static/assets/js/plugins/ui/ripple.min.js"></script>
+	<!-- /theme JS files -->
+
+
+</head>
+
+<body class="login-container login-cover ">
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Content area -->
+				<div class="content pb-20">
+					<div class="row">
+
+							<div class="col-md-6 col-md-offset-3 col-sm-12">
+								{% include 'partials/messages.html' %}
+							</div>
+							
+					</div>
+					{% load static %}
+					<!-- Form with validation -->
+					<form action="{% url "login" %}" method="post" class="">
+            		 {% csrf_token %}
+						<div class="panel panel-body login-form">
+							<div class="text-center">
+								<div class="icon-object border-pink-400 text-pink-400"><i class="icon-reading"></i></div>
+								<div class="row">
+									<div class="col-lg-12 col-sm-12">
+										
+									</div>
+								</div>
+								<!--div class="">
+									<img  src="{% static "img/logo_new.png"%}" width="200" height="100" class=" img-lg" alt="Father">
+								</div-->
+								
+								
+							
+								
+
+								<small class="display-block mt-5"> {% trans "Entrez vos informations d'identification ci-dessous " %} </small></h6>
+							</div>
+
+							<div class="form-group {% if form.email.error  %} has-error {% endif %} has-feedback has-feedback-left">
+
+								{{ form.email }}
+								<div class="form-control-feedback">
+									<i class="icon-user text-muted"></i>
+								</div>
+								{% if form.email.error  %}
+								<span class="help-block text-danger"><i class="icon-cancel-circle2 position-left"></i> {% trans "Utilisateur inconnu ou mauvais de mot de passe. " %}  </span>
+								{% endif %} 
+							</div>
+							<div class="form-group {% if form.password.error  %} has-error {% endif %} has-feedback has-feedback-left">
+								{{ form.password }}
+								<div class="form-control-feedback">
+									<i class="icon-lock2 text-muted"></i>
+								</div>
+								{% if form.password.error  %}
+								<span class="help-block text-danger"><i class="icon-cancel-circle2 position-left"></i> {% trans "Utilisateur inconnu ou mauvais de mot de passe. " %}  </span>
+								{% endif %}
+							</div>
+
+
+							<div class="form-group login-options">
+								<div class="row">
+									<!--div class="col-sm-6">
+										<label class="checkbox-inline">
+											<input type="checkbox" class="styled" checked="checked">
+										{% trans "Remember " %} 
+										</label>
+									</div-->
+
+									<div class="col-sm-6 text-right">
+										<a >{% trans "Mot de passe oublié ?" %} </a>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<button type="submit" class="btn bg-pink-400 btn-block">{% trans "Se connecter" %} <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+
+							<span class="help-block text-center no-margin">L'utilisation de ce site entraîne votre acceptation des <a href="http://www.taalimup.com">conditions d’utilisation </a></span>
+							<!--span class="help-block text-center no-margin"> © Copyright 2019 <a href="http://www.taalimup.com/" target="_blank">TaalimUP</a>.Tous droits réservés </span-->
+
+
+						</div>
+
+						
+					</form>
+					<!-- /form with validation -->
+
+					
+
+
+					
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block references %}
+	{{block.super}}
+	<script type="text/javascript">
+
+		/**********************  *************************/
+
+
+
+		window.onload= function()
+		{
+		    $.ajax({
+		    
+		    	//url: window.webHost+'/school/class/'+classe_id+'/'+subject_id+'/'+teacher_id+'/add-teacher-to-subject',*/
+		    
+			    url:window.webHost+'/school/levels/classe/add/items',
+			    success:  function(data) {
+			    
+			        
+			    $('#slideBarClasse').html(data);
+
+			    },
+			    dataType:'html'
+
+			});
+
+			$.ajax({
+        
+        
+		        url:window.webHost+'/school/displaySlideBar',
+		        success:  function(data) {
+		        
+		            
+		        $('#slideBarLevel').html(data);
+		        },
+		        dataType:'html'
+
+		    	});
+
+		}
+		
+	</script>
+
+{% endblock %}
+
+
+{% block title %} {% trans "Scolarité " %} {% endblock %}
+
+{% block page_title %}{% trans "Gestion de scolarité " %} {% endblock %}
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>{% trans "Accueil" %}</a></li>
+<li class="active">{% trans "Gestion de scolarité" %}</li>
+{% endblock %}
+{% block sidebar %}
+<ul class="navigation navigation-main navigation-accordion">
+	<!-- Main -->
+	
+	
+
+		<li>
+			<a href=""><i class="icon-tree6"></i> <span>{% trans "Niveaux scolaires" %} </span></a>
+			<ul>
+				
+				<li><a href="{% url "levels_list" %}"><i class="icon-menu7"></i>{% trans "Liste" %}</a></li>
+				
+			</ul>
+		</li>
+
+		
+	
+		<li>
+			<a href=""><i class="icon-books"></i> <span>{% trans "Matières scolaires" %}</span></a>
+			<ul>
+				<li><a href="{% url "subjects_list" %}"><i class="icon-menu7"></i>{% trans "Liste" %}</a></li>
+				
+			</ul>
+		</li>
+									
+		</ul>	
+	</li>
+
+	
+<!-- /main -->
+</ul>
+{% endblock %}
+{% block content_area %}
+
+
+{% endblock %}
+

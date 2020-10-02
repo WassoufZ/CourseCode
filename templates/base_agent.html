@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% if envoi %} Votre message a bien été envoyé !{% endif %}
+{% block title %} TaalimUp {% endblock %}
+{% block hierarchy %}
+<li><a href="index.html"><i class="icon-home2 position-left"></i>Dashboard</a></li>
+<li class="active">Gestion des  clients - Modifier</li>
+{% endblock %}
+{% block sidebar %}
+<ul class="navigation navigation-main navigation-accordion">
+	<!-- Main -->
+	<li><a href="index.html"><i class="icon-home4"></i> <span>Accueil</span></a></li>
+	<li>
+		<a href="{% url "client_list" %}"><i class="icon-graduation"></i> <span>Gestion des clients</span></a>
+		<ul>
+			<li><a href="{% url "client_list" %}"><i class="icon-menu7"></i>clients</a></li>
+			<li><a href="{% url "create_client" %}"><i class="icon-add"></i>Ajouter</a></li>
+			<li><a href="{% url "schools_list" %}"><i class="icon-menu7"></i>Liste des écoles</a></li>
+		</ul>
+	</li>
+
+	<li class="active">
+		<a href="{% url "schools_list" %}" ><i class="icon-users"></i> <span> Ecoles</span></a>
+		<ul>
+			<li><a href="{% url "schools_list" %}"><i class="icon-menu7"></i>Liste des écoles</a></li>									
+		</ul>
+	</li>
+	
+	
+	
+	
+	<!-- /main -->
+<!-- /main -->
+</ul>
+{% endblock %}
+{% block content_area %}
+
+{% endblock %}
+

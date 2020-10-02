@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+{% load i18n %}
+
+<html lang="en">
+<head>
+{% load static %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{% static "img/logo.png" %}" type="image/png">
+	<title>{% block title %}Accueil{% endblock %}</title>
+	
+	<!-- Global stylesheets -->
+	{% block references %}
+	
+
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Amiri|Cairo" rel="stylesheet">
+	<link href="{% static "assets/css/icons/icomoon/styles.css"%}" rel="stylesheet" type="text/css">
+	<link href="{% static "assets/css/bootstrap.css"%}" rel="stylesheet" type="text/css">
+	<link href="{% static "assets/css/core.css"%}" rel="stylesheet" type="text/css">
+	<link href="{% static "assets/css/components.css"%}" rel="stylesheet" type="text/css">
+	<link href="{% static "assets/css/colors.css"%}" rel="stylesheet" type="text/css">
+	<link href="{% static "assets/css/colors.css" %}" rel="stylesheet" type="text/css"/>
+	<!-- /global stylesheets -->
+
+	<!-- Custom stylesheets -->
+	<link href="{% static "css/custom.css"%}" rel="stylesheet" type="text/css">
+	<!-- /Custom stylesheets -->
+	
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="{% static "assets/js/plugins/loaders/pace.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/core/libraries/jquery.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/core/libraries/bootstrap.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/loaders/blockui.min.js"%}"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/datatables.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/select2.min.js"%}"></script>
+
+	
+
+	<script type="text/javascript" src="{% static "assets/js/pages/datatables_basic.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/media/fancybox.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/uniform.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/switchery.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/switch.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/bootstrap_select.min.js"%}"></script>
+
+	<!--script type="text/javascript" src="{% static "assets/js/pages/form_checkboxes_radios.js"%}"></script-->
+	<script type="text/javascript" src="{% static "assets/js/pages/form_layouts.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/ui/ripple.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/notifications/sweet_alert.min.js"%}"></script>
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="{% static "assets/js/plugins/notifications/jgrowl.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/ui/moment/moment.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/daterangepicker.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/anytime.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/pickadate/picker.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/pickadate/picker.date.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/pickadate/picker.time.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pickers/pickadate/legacy.js"%}"></script>
+
+	<script type="text/javascript" src="{% static "assets/js/pages/picker_date.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/pages/components_modals.js"%}"></script>
+
+	<script type="text/javascript" src="{% static "assets/js/core/libraries/jasny_bootstrap.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/uniform.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/autosize.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/formatter.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"%}"></script>
+	
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/passy.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/inputs/maxlength.min.js"%}"></script>
+
+
+	<script type="text/javascript" src="{% static "assets/js/pages/form_controls_extended.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/pagination/bootpag.min.js"%}" </script>
+	<script type="text/javascript" src="{% static "assets/js/pages/components_pagination.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/core/app.js"%}"></script>
+
+	<!--script type="text/javascript" src="{% static "assets/js/pages/datatables_api.js"%}"></script-->
+
+	<!-- Theme PDF files -->
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/datatables.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/select2.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/extensions/jszip/jszip.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/extensions/pdfmake/pdfmake.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/extensions/pdfmake/vfs_fonts.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "assets/js/plugins/tables/datatables/extensions/buttons.min.js"%}"></script>
+
+	<script type="text/javascript" src="{% static "assets/js/pages/datatables_extension_buttons_html5.js"%}"></script>
+
+	<script type="text/javascript" src="{% static "assets/js/pages/gallery_library.js"%}"></script>
+	<!-- /theme JS files -->
+	<script type="text/javascript" src="{% static "js/app.js"%}"></script>
+
+
+	{% endblock%}
+</head>
+
+<body>
+
+	<!-- Main navbar -->
+	<div class="navbar navbar-default header-highlight">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{% url "login" %}">
+				<img src="{% static "assets/images/logo_test1.png"%}" alt="" 
+				style="    margin-top: -11px;
+    height: 55px;
+    width: 135px;
+    /**margin-left: 26px*/"></a>
+
+			<ul class="nav navbar-nav visible-xs-block">
+			
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+				<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+			</ul>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-mobile">
+			<ul class="nav navbar-nav">
+				<li><a href="{% url "logout" %}" class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+			</ul>
+
+			<div class="navbar-right">
+				<!--p class="navbar-text">User Name!</p-->
+				<!--p class="navbar-text">{% trans "Salam" %},  {{user.last_name}} {{user.first_name}}!</p-->
+
+
+
+				<p class="navbar-text">{% trans "Ecole" %} 
+
+					{% if user.user_type == 'school_admin'  %} 
+
+						{{user.admin.school.name}}			
+
+					
+
+					{% endif %}
+				!</p>
+
+				
+				<p class="navbar-text"><span class="label bg-success">{% trans "En ligne" %}</span></p>
+
+				<ul class="nav navbar-nav">
+					<li class="dropdown hidden-xs">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-bell2"></i>
+							<span class="visible-xs-inline-block position-right">Activity</span>
+							<!--span class="status-mark border-pink-300"></span-->
+						</a>
+
+					</li>
+					<li><a href="{% url "logout" %}" class="sidebar-control"><i class="icon-switch2"></i><span class="visible-xs-inline-block position-right">Déconnexion</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /main navbar -->
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main sidebar -->
+			<div class="sidebar sidebar-main">
+				<div class="sidebar-content">
+
+					<!-- User menu -->
+					<div class="sidebar-user-material">
+						<div class="category-content">
+							<div class="sidebar-user-material-content">
+								<a href="#">
+
+									{% if user.user_type == 'school_admin' %} 
+
+									<img src="{% static "img/user.png"%}" class="img-circle img-responsive">
+									
+
+									{% elif user.user_type == 'agent' %}
+
+									<img src="{% static "img/user.png"%}" class="img-circle img-responsive">
+
+									{% endif %}
+									
+										
+								
+									
+								</a>
+								<h6> {{user.get_full_name}}</h6>
+								<span class="text-size-small">
+
+									{% if user.user_type == 'school_admin' %} 
+
+									 	{% trans "Administarteur (المشرف)" %}
+
+
+									{% elif user.user_type == 'agent' %}
+
+										{% trans "Agent (المشرف)" %}
+
+									{% endif %}
+
+
+								</span>
+							</div>
+
+							<div class="sidebar-user-material-menu">
+								<a href="#user-nav" data-toggle="collapse"><span>{% trans "Mon compte" %}</span> <i class="caret"></i></a>
+							</div>
+						</div>
+
+						<div class="navigation-wrapper collapse" id="user-nav">
+							<ul class="navigation">
+								<li><a ><i class="icon-user-plus"></i> <span>{% trans "Mon profile" %}</span></a></li>
+								<li><a href="{% url "logout" %}"><i class="icon-switch2"></i> <span>{% trans "Déconnexion" %}</span></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- /user menu -->
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div id="sidebar" class="category-content no-padding">
+						{% block sidebar %}
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<!-- Main -->
+								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+								<li><a href="index.html"><i class="icon-home4"></i> <span>Accueil</span></a></li>
+								<li>
+									<a href="{% url "client_list" %}"><i class="icon-graduation"></i> <span>Gestion des clients</span></a>
+									<ul>
+										<li><a href="{% url "client_list" %}"><i class="icon-menu7"></i>clients</a></li>
+										<li><a href="{% url "create_client" %}"><i class="icon-add"></i>Ajouter</a></li>
+									</ul>
+								</li>
+								
+
+								<!-- /main -->
+							</ul>
+						{% endblock %}
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+
+
+			<!-- Main content -->
+			
+			<div class="content-wrapper">
+				{% block pageheader %}
+				<!-- Page header -->
+				<div class="page-header">
+					<div class="page-header-content">
+						<div class="page-title">
+
+						</div>
+					</div>
+
+					<div class="breadcrumb-line breadcrumb-line-component">
+						<ul class="breadcrumb">
+							{% block hierarchy %}
+							<li><a href="index.html"><i class="icon-home2 position-left"></i>Dashboard</a></li>
+							<li class="active">Gestion des utilisateurs</li>
+							{% endblock %}
+
+						</ul>
+					</div>
+				</div>
+				<!-- /page header -->
+				{% endblock %}
+
+
+				<!-- Content area -->
+				
+				<div class="content">
+
+				
+					
+				{% block content_area %}
+		
+					
+					
+				{% endblock %}
+
+				<!-- Footer -->
+					{% include 'partials/footer.html' %}
+					<!-- /footer -->
+				</div>
+				
+				<!-- /content area -->
+
+			</div>
+			
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+</body>
+</html>

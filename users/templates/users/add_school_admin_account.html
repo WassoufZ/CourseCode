@@ -1,0 +1,146 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% block page_title %}Gestion des utilisateurs {% endblock %}
+
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "school_admins_list" %}">{% trans "Gestion des comptes utilisateurs " %} </a></li>
+<li class="active">{% trans "Administrateurs" %} </li>
+<li class="active">{% trans "Ajouter un Compte administrateur" %} </li>
+{% endblock %}
+
+{% block content_area %}
+<!-- Horizontal form options -->
+<div class="row">
+	<div class="col-md-12">
+		<!-- Basic layout-->
+		
+
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h4 class="panel-title">Ecole {{ school.name}} - Ajouter Compte administrateur</h4>
+			</div>
+
+			<div class="panel-body">
+			
+			<!-- Data table abonnement -->				
+
+				<form class="form-horizontal" method="post" enctype="multipart/form-data" 
+					action="{% url "add_school_admin_account" school_id=request.session.school_id %}">
+					{% csrf_token %}
+
+
+
+					<div class="form-group {% if registration_form.email.errors  %} has-error {% endif %}">
+						<label class="col-lg-2 control-label text-semibold">{{ registration_form.email.label }} <span class="text-danger">*</span>:</label>
+						<div class="col-lg-10">
+							
+							{{ registration_form.email }}
+							<span class="help-block">{{ registration_form.email.errors }}</span>
+						</div>
+					</div>
+
+
+					<div class="form-group {% if admin_form.last_name.errors or admin_form.first_name.errors %} has-error {% endif %}">
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-4 control-label text-semibold" for="{{ admin_form.last_name.id_for_label }}">{{ admin_form.last_name.label }} <span class="text-danger">*</span>: </label>
+								<div class="col-md-8">
+									{{ admin_form.last_name }}
+									<span class="help-block">{{ admin_form.last_name.errors}}</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-2 control-label text-semibold" for="{{ admin_form.first_name.id_for_label }}">{{ admin_form.first_name.label }} <span class="text-danger">*</span>: </label>
+								<div class="col-md-10">
+									<div class="row">
+										<div class="col-md-6">
+											{{ admin_form.first_name }}
+											<span class="help-block">{{ admin_form.first_name.errors}}</span>
+										</div>
+
+										<div class="col-md-6">
+											{{ admin_form.first_name2 }}
+											<span class="help-block">{{ admin_form.first_name2.errors}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="form-group {% if registration_form.gender.errors  %} has-error {% endif %}">
+						<label class="col-lg-2 control-label text-semibold" for="{{ admin_form.gender.id_for_label }}">{{ admin_form.gender.label }} <span class="text-danger">*</span>: </label>
+						<div class="col-lg-10">
+
+							{{ admin_form.gender }}
+							<span class="help-block"> {{ admin_form.gender.errors}}</span>
+						
+						</div>
+					</div>
+
+					<div class="form-group {% if admin_form.date_of_birth.errors or admin_form.place_of_birth.errors %} has-error {% endif %}">
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-4 control-label text-semibold" for="{{ admin_form.tel_numdate_of_birthber1.id_for_label }}">{{ admin_form.date_of_birth.label }} <span class="text-danger">*</span>: </label>
+								<div class="col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+										{{ admin_form.date_of_birth}}
+									</div>
+									<span class="help-block">{{ admin_form.date_of_birth.errors}}</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-4 control-label text-semibold" for="{{ admin_form.place_of_birth.id_for_label }}">{{ admin_form.place_of_birth.label }} <span class="text-danger">*</span>: </label>
+								<div class="col-md-8">
+									{{ admin_form.place_of_birth}}	
+									<span class="help-block">{{ admin_form.place_of_birth.errors}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group {% if admin_form.tel_number.errors or admin_form.tel_number2.errors %} has-error {% endif %}">
+						<label class="col-lg-2 control-label text-semibold">{{ admin_form.tel_number.label }}  <span class="text-danger">*</span>:</label>
+						<div class="col-lg-10">
+							<div class="row">
+								<div class="col-md-6">
+									{{ admin_form.tel_number }}
+									<span class="help-block">{{ admin_form.tel_number.errors}}</span>
+								</div>
+
+								<div class="col-md-6">
+									{{ admin_form.tel_number2 }}
+									<span class="help-block">{{ admin_form.tel_number2.errors}}</span>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+
+					<div class="text-right">
+						<button type="submit" class="btn btn-primary">Enregistrer<i class="icon-arrow-right14 position-right"></i></button>
+					</div>
+
+				</form>
+
+
+			<!-- Data table abonnement-->							
+							
+			</div>
+		</div>
+
+		<!-- /Horizontal form update client-->
+
+
+	</div>
+</div>
+<!-- /Horizontal form options -->
+{% endblock %}

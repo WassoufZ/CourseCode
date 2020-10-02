@@ -1,0 +1,51 @@
+/* ------------------------------------------------------------------------------
+ *
+ *  # Navbar page
+ *
+ *  Styles for navbar layouts
+ *
+ *  Version: 0.1
+ *  Latest update: Mai 08, 2017
+ *
+ * ---------------------------------------------------------------------------- */
+
+
+.login-cover {
+    background: url(../images/login_cover.jpeg) no-repeat;
+    background-size: cover;
+}
+
+.navbar-default {
+    background-color: #03A9F4;
+    border-color: #ddd;
+}
+
+/*2735*/
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: transparent;
+    border-color: transparent;
+    color: #333333;
+}
+/*4488*/
+.navbar-default {
+    background-color: #2196f3;
+    border-color: #ddd;
+}
+/*4500*/
+.navbar-default .navbar-text {
+    color: #fff;
+}
+/*4503*/
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+/*4507*/
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #eeeeee;
+    background-color: transparent;
+}
+/*4539*/
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: transparent;
+    color: #333333;
+}
