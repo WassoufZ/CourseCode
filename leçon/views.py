@@ -21,3 +21,24 @@ def add_lesson(request):
         'form':form,
     }
     return render(request,'leçon/add_lesson.html',context)
+
+
+def delete_lesson(request,pk):
+    lesson = Lesson.objects.get(pk=pk)
+    lesson.delete()
+    return redirect('view_lessons')
+
+def lesson_info(request,pk):
+    lesson = Lesson.objects.get(pk=pk)
+    form = LessonForm(instance=lesson)
+    if request.method == 'POST':
+        form = LessonForm(request.POST,instance=lesson)
+        if form.is_valid:
+            form.save()
+            return redirect('lesson_info',lesson.id)
+    context={
+        'lesson':lesson,
+        'form':form,
+        }
+
+    return render(request,'leçon/lesson_info.html',context)

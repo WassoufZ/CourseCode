@@ -1,36 +1,107 @@
 {% extends "base_scolarité.html" %}
 {% load i18n %}
 {% block title %} Leçon {% endblock %}
-{% load crispy_forms_tags %}
 
 {% block hierarchy %}
 <li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
 <li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
-<li class="active">{% trans "Leçons" %} </li>
-{% endblock %} 
+
+<li class="active">{% trans "Ajouter Un Leçon" %} </li>
+{% endblock %}
 
 {% block content_area %}
 
-
 <div class="row">
-	<div class="col-md-12">		
-		<div class="panel panel-flat">
-			<div class="panel-heading">
-				<h4 class="panel-title"> {% trans "Ajouter un leçon" %}  </h4>
-				<div class="heading-elements">
-		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
-		        		href="" 
-		            ><i class="icon-add position-left"></i> {% trans "Ajouter" %}   </a>	        	
-		    	</div>
-			</div>				
-		</div>
-	</div>
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title"> {% trans "Ajouter un leçon" %} </h4>
+                <div class="heading-elements">
+                    <a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href=""><i
+                            class="icon-add position-left"></i> {% trans "Ajouter" %} </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<form method="POST" action="." class="needs-validation" >
-{% csrf_token %}
-{{form|crispy}}
 
-<button class="main_btn" type="submit">Save
-    Lesson</button>
-</form>
+
+<div>
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Add lesson form</h6>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.level_id }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.subject_id }} </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.chapiter }} </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.lesson }} </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.skill }} </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.vacations }} </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.link }} </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.order }} </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form.remarques }} </div>
+                    </div>
+
+                </div>
+                <div class="checkbox checkbox-switchery switchery-sm">
+                    <label>
+                        {{form.state}}
+                        <span style="font-weight: 500;">visible</span>
+                    </label>
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Submit <i
+                            class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content_area %}
