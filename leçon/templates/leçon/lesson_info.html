@@ -213,8 +213,8 @@
 					<div class="tabbable">
 						<ul class="nav nav-tabs nav-tabs-highlight nav-justified">
 							<li class="active"><a href="#highlighted-justified-tab1" data-toggle="tab">videos</a></li>
-							<li><a href="#highlighted-justified-tab2" data-toggle="tab">documents</a></li>
-							<li><a href="#highlighted-justified-tab3" data-toggle="tab">images</a></li>
+							<li><a href="#highlighted-justified-tab2" data-toggle="tab">images</a></li>
+							<li><a href="#highlighted-justified-tab3" data-toggle="tab">documents</a></li>
 							<li><a href="#highlighted-justified-tab4" data-toggle="tab">urls</a></li>
 						</ul>
 
@@ -246,7 +246,7 @@
 														<h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
 
 															<a href="{% url 'delete_lesson_video' video.pk %}" class="text-muted"><i class="icon-trash pull-right"  style="margin-left:1rem;"></i></a>
-															<a href="#" class="text-muted"><i class="icon-pencil5 pull-right"></i></a></h6>
+															<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}" class="text-muted"><i class="icon-pencil5 pull-right"></i></a></h6>
 													</div>
 													
 												</div>
@@ -261,7 +261,7 @@
 								<div class="page-header-content">
 									<div>
 										<h6>
-											Documents list:
+											Images list:
 										</h6>
 									</div>
 									<div class="heading-elements">
@@ -277,7 +277,7 @@
 								<div class="page-header-content">
 									<div>
 										<h6>
-											Images list:
+											Documents list:
 										</h6>
 									</div>
 									<div class="heading-elements">

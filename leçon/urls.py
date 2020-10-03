@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^lesson_info/(\d+)/$', views.lesson_info, name="lesson_info"), 
     
     url(r'^lesson_info/(\d+)/add_lesson_video/$', views.add_lesson_video, name="add_lesson_video"),
+    url(r'^lesson_info/(\d+)/edit_lesson_video/(\d+)/$', views.edit_lesson_video, name="edit_lesson_video"),  
     url(r'^delete_lesson_video/(\d+)/$', views.delete_lesson_video, name="delete_lesson_video"),  
   
  

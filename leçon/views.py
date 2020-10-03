@@ -28,7 +28,6 @@ def delete_lesson(request,pk):
     lesson.delete()
     return redirect('view_lessons')
 
-
 def lesson_info(request,pk):
     lesson = Lesson.objects.get(pk=pk)
     videos = Video.objects.filter(lesson=lesson)
@@ -55,6 +54,21 @@ def add_lesson_video(request,lesson_id):
             instance = form.save(commit=False)
             instance.lesson = lesson
             instance.save()
+            return redirect('lesson_info',lesson_id)
+    context = {
+        'form':form,
+        'lesson':lesson,
+    }
+    return render(request,'leçon/add_lesson_video.html',context)
+
+def edit_lesson_video(request,lesson_id,pk):
+    lesson = Lesson.objects.get(id=lesson_id)
+    video = Video.objects.get(pk=pk)
+    form = VideoForm(instance=video)
+    if request.method == 'POST':
+        form = VideoForm(request.POST,request.FILES,instance=video)
+        if form.is_valid():
+            form.save()
             return redirect('lesson_info',lesson_id)
     context = {
         'form':form,
