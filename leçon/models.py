@@ -1,4 +1,6 @@
 from django.db import models
+from .validators import validate_file_extension,validate_document_extension
+
 
 class Lesson(models.Model):
     level_id = models.CharField(max_length=200)
@@ -20,7 +22,7 @@ class Lesson(models.Model):
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE,blank=True,null=True)
     title = models.CharField(max_length=200)
-    video = models.FileField()
+    video = models.FileField(validators=[validate_file_extension])
     def __str__(self):
         return self.title
 
@@ -36,7 +38,7 @@ class Image(models.Model):
 class Document(models.Model):
     lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    document = models.FileField()
+    document = models.FileField(validators=[validate_document_extension])
     def __str__(self):
         return self.title
 
