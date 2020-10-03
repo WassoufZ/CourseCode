@@ -15,10 +15,10 @@ class Lesson(models.Model):
     state = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.created
+        return self.level_id
 
 class Video(models.Model):
-    lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE,blank=True,null=True)
     title = models.CharField(max_length=200)
     video = models.FileField()
     def __str__(self):

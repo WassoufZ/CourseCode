@@ -231,7 +231,28 @@
 												<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
 													href="{% url 'add_lesson_video' lesson.id %}"><i class="icon-add position-left"></i> Ajouter </a>
 											</div>
-										</div><hr>			
+										</div>
+										<hr>
+										<div class="row">
+											{% for video in videos %}
+											<div class="col-lg-6 col-sm-6" >
+												<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
+													<div class="video-container" >
+														<video controls play style="width: 31rem;">
+															<source src="{{video.video.url}}">
+														</video>													</div>
+					
+													<div class="caption">
+														<h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
+
+															<a href="{% url 'delete_lesson_video' video.pk %}" class="text-muted"><i class="icon-trash pull-right"  style="margin-left:1rem;"></i></a>
+															<a href="#" class="text-muted"><i class="icon-pencil5 pull-right"></i></a></h6>
+													</div>
+													
+												</div>
+											</div>
+											{% endfor %}
+										</div>	
 								<!-- /inside page title -->
 							</div>
 

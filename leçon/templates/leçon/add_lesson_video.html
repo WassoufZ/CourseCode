@@ -1,7 +1,10 @@
 {% extends "base_scolarité.html" %}
 {% load i18n %}
-{% block title %} Leçon {% endblock %}
+{% load static %}
 
+
+
+{% block title %} Leçon {% endblock %}
 {% block hierarchy %}
 <li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
 <li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
@@ -10,5 +13,130 @@
 {% endblock %}
 
 {% block content_area %}
+<link href="{% static 'css/leçon.css' %}" rel="stylesheet" type="text/css" />
 
+<div class="row" style="margin-left:0px;">
+    <div>
+        <!-- Basic layout-->
+        <form method="POST" action="." class="needs-validation" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="panel panel-flat col-md-8">
+                <div class="row" style="margin:1rem;margin-right: -1rem;">
+                    <div class="col-md-7">
+                        <h4>Video file</h4>
+                        <p>add your video here, only video formats are allowed.</p><br>
+                        <div class="form-group">
+                            {{form.video}}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'img/leçon/video.jpg'%}" class="img-thumbnail" style="width: 27rem;">
+                    </div>
+                </div>
+                <div class="panel-body d-none" id="progressdiv">
+                    <div >
+                        <div>
+                            <div class="progress" style="height: 2rem;">
+                                <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                    role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="97"
+                                    style="width: 0%">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /basic layout -->
+    </div>
+    <div class="col-md-4">
+        <!-- Static mode -->
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title">video info</h4>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{form.title}}
+                </div>
+                <div class="form-group">
+                    <smal></small>
+
+                </div>
+                <div class="form-group">
+                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Save
+                        Course</button>
+                    <button id="loading_btn" style="width: 100%;" class="btn btn-success d-none" type="button"
+                        disabled>Uploading...</button>
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- /static mode -->
+    </div>
+</div>
+
+<div id="alert_wrapper" class="d-none">
+    <a href="#myModal" data-toggle="modal"><button id="message_button"></button>
+    </a>
+</div>
+
+<div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+        data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false"
+        data-animation="pop" data-timer="null" style="display: block; margin-top: -146px;">
+        <div class="sa-icon sa-error" style="display: none;">
+            <span class="sa-x-mark">
+                <span class="sa-line sa-left"></span>
+                <span class="sa-line sa-right"></span>
+            </span>
+        </div>
+        <div class="sa-icon sa-warning" style="display: none;">
+            <span class="sa-body"></span>
+            <span class="sa-dot"></span>
+        </div>
+        <div class="sa-icon sa-info" style="display: none;"></div>
+        <div class="sa-icon sa-success animate" style="display: block;">
+            <span class="sa-line sa-tip animateSuccessTip"></span>
+            <span class="sa-line sa-long animateSuccessLong"></span>
+
+            <div class="sa-placeholder"></div>
+            <div class="sa-fix"></div>
+        </div>
+        <div class="sa-icon sa-custom" style="display: none;"></div>
+        <h2>Good job!</h2>
+        <p style="display: block;">Your video uploaded successfully!</p>
+        <fieldset>
+            <input type="text" tabindex="3" placeholder="">
+            <div class="sa-input-error"></div>
+        </fieldset>
+
+        <div class="sa-button-container">
+            <div class="sa-confirm-button-container">
+                <a href="{% url 'lesson_info' lesson.id %}"><button class="confirm" tabindex="1"
+                    style="display: inline-block; background-color:
+                    #1F8EE7; box-shadow: 
+                    #1F8EE7 0px 0px 2px
+                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Back to lesson</button></a>
+            </div>
+            <div class="sa-confirm-button-container">
+                <a href="{% url 'add_lesson_video' lesson.id %}"><button class="confirm" tabindex="1"
+                    style="display: inline-block; background-color:
+                     rgb(102, 187, 106); box-shadow: 
+                     rgba(102, 187, 106, 0.8) 0px 0px 2px
+                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Upload again</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal HTML -->
+
+
+
+<script src="{% static 'js/uploader.js' %}"></script>
 {% endblock content_area %}

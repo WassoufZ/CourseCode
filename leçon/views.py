@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponseRedirect
 from .forms import LessonForm,VideoForm
 from.models import *
 
@@ -31,6 +31,7 @@ def delete_lesson(request,pk):
 
 def lesson_info(request,pk):
     lesson = Lesson.objects.get(pk=pk)
+    videos = Video.objects.filter(lesson=lesson)
     form = LessonForm(instance=lesson)
     if request.method == 'POST' and 'LessonForm' in request.POST:
         form = LessonForm(request.POST,instance=lesson)
@@ -40,10 +41,28 @@ def lesson_info(request,pk):
     context={
         'lesson':lesson,
         'form':form,
+        'videos':videos
         }
 
     return render(request,'leçon/lesson_info.html',context)
 
 def add_lesson_video(request,lesson_id):
     lesson = Lesson.objects.get(id=lesson_id)
-    return render(request,'leçon/add_lesson_video.html')
+    form = VideoForm
+    if request.method == 'POST':
+        form = VideoForm(request.POST,request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.lesson = lesson
+            instance.save()
+            return redirect('lesson_info',lesson_id)
+    context = {
+        'form':form,
+        'lesson':lesson,
+    }
+    return render(request,'leçon/add_lesson_video.html',context)
+
+def delete_lesson_video(request,pk):
+    video = Video.objects.get(pk=pk)
+    video.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
