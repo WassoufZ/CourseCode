@@ -1,5 +1,5 @@
 from django.db import models
-from .validators import validate_file_extension,validate_document_extension
+from .validators import *
 
 
 class Lesson(models.Model):
@@ -30,7 +30,7 @@ class Video(models.Model):
 class Image(models.Model):
     lesson = models.ForeignKey(Lesson, default=None, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    image = models.FileField(upload_to ='images/')
+    image = models.FileField(validators=[validate_image_extension])
 
     def __str__(self):
         return self.lesson.level_id
