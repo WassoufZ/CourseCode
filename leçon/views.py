@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse
+from django.core.files.storage import FileSystemStorage
 from .forms import LessonForm,VideoForm,ImageForm
 from.models import *
 
@@ -85,6 +86,36 @@ def delete_lesson_video(request,pk):
     video = Video.objects.get(pk=pk)
     video.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+
+
+
+def upload_images(request,lesson_id):
+    return render (request,'leçon/upload_images.html')
+
+
+
+def save_images(request,lesson_id):
+    lesson = Lesson.objects.get(id=lesson_id)
+    title = request.POST.get('title')
+    images = request.FILES.getlist("file[]")
+    print(images)
+    for img in images:
+        fs = FileSystemStorage()
+        file_path=fs.save(img.name,img)
+        image=Image(lesson=lesson,title=title,image=file_path)
+        image.save()
+    return HttpResponse('files uploded')
+
+
+
+
+
+
+
+
+
 
 
 def add_lesson_image(request,lesson_id):
