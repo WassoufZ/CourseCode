@@ -88,32 +88,20 @@ def delete_lesson_video(request,pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-
-
-
 def upload_images(request,lesson_id):
+    if request.method == 'POST':
+        lesson = Lesson.objects.get(id=lesson_id)
+        title = request.POST.get('title')
+        images = request.FILES.getlist("file[]")
+        print(images)
+        for img in images:
+            fs = FileSystemStorage()
+            file_path=fs.save(img.name,img)
+            image=Image(lesson=lesson,title=title,image=file_path)
+            image.save()
+        return HttpResponse('files uploded')
+
     return render (request,'leçon/upload_images.html')
-
-
-
-def save_images(request,lesson_id):
-    lesson = Lesson.objects.get(id=lesson_id)
-    title = request.POST.get('title')
-    images = request.FILES.getlist("file[]")
-    print(images)
-    for img in images:
-        fs = FileSystemStorage()
-        file_path=fs.save(img.name,img)
-        image=Image(lesson=lesson,title=title,image=file_path)
-        image.save()
-    return HttpResponse('files uploded')
-
-
-
-
-
-
-
 
 
 
