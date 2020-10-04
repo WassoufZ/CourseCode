@@ -28,11 +28,12 @@ class Video(models.Model):
 
 
 class Image(models.Model):
-    lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, default=None, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    image = models.ImageField()
+    image = models.FileField(upload_to ='images/')
+
     def __str__(self):
-        return self.title
+        return self.lesson.level_id
 
 
 class Document(models.Model):
@@ -49,4 +50,3 @@ class Url(models.Model):
     link = models.CharField(max_length=200)
     def __str__(self):
         return self.title
-

@@ -1,5 +1,6 @@
 {% extends "base_scolarité.html" %}
 {% load i18n %}
+{% load static %}
 {% block title %} Leçon {% endblock %}
 {% block hierarchy %}
 <li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
@@ -104,7 +105,8 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-link"
 														data-dismiss="modal">Close</button>
-													<button type="submit" class="btn btn-primary" name="LessonForm">Save</button>
+													<button type="submit" class="btn btn-primary"
+														name="LessonForm">Save</button>
 												</div>
 										</form>
 									</div>
@@ -220,41 +222,52 @@
 
 						<div class="tab-content">
 							<div class="tab-pane active" id="highlighted-justified-tab1">
+
+
+
 								<!-- Inside page title -->
-										<div class="page-header-content">
-											<div>
-												<h6>
-													videos list:
+								<div class="page-header-content">
+									<div>
+										<h6>
+											videos list:
+										</h6>
+									</div>
+									<div class="heading-elements">
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="{% url 'add_lesson_video' lesson.id %}"><i
+												class="icon-add position-left"></i> Ajouter </a>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									{% for video in videos %}
+									<div class="col-lg-6 col-sm-6">
+										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
+											<div class="video-container">
+												<video controls play style="width: 31rem;">
+													<source src="{{video.video.url}}">
+												</video> </div>
+
+											<div class="caption">
+												<h6 class="no-margin"><a href="#"
+														class="text-default">{{video.title}}</a>
+
+													<a href="{% url 'delete_lesson_video' video.pk %}"
+														class="text-muted"><i class="icon-trash pull-right"
+															style="margin-left:1rem;"></i></a>
+													<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}"
+														class="text-muted"><i class="icon-pencil5 pull-right"></i></a>
 												</h6>
 											</div>
-											<div class="heading-elements">
-												<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-													href="{% url 'add_lesson_video' lesson.id %}"><i class="icon-add position-left"></i> Ajouter </a>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											{% for video in videos %}
-											<div class="col-lg-6 col-sm-6" >
-												<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
-													<div class="video-container" >
-														<video controls play style="width: 31rem;">
-															<source src="{{video.video.url}}">
-														</video>													</div>
-					
-													<div class="caption">
-														<h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
 
-															<a href="{% url 'delete_lesson_video' video.pk %}" class="text-muted"><i class="icon-trash pull-right"  style="margin-left:1rem;"></i></a>
-															<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}" class="text-muted"><i class="icon-pencil5 pull-right"></i></a></h6>
-													</div>
-													
-												</div>
-											</div>
-											{% endfor %}
-										</div>	
-								<!-- /inside page title -->
+										</div>
+									</div>
+									{% endfor %}
+								</div>
 							</div>
+
+
+
 
 							<div class="tab-pane" id="highlighted-justified-tab2">
 								<!-- Inside page title -->
@@ -265,12 +278,44 @@
 										</h6>
 									</div>
 									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="{% url 'add_lesson_image' lesson.id %}"><i
+												class="icon-add position-left"></i> Ajouter </a>
 									</div>
-								</div><hr>			
-						<!-- /inside page title -->
+								</div>
+								<hr>
+								<div class="row">
+									{% for image in images%}
+									<div class="col-md-4">
+										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
+											<div class="thumb">
+												<img src="{{image.image.url}}" alt="">
+												<div class="caption-overflow">
+													<span>
+														<a href="{{image.image.url}}"
+															class="btn btn-flat border-white text-white btn-rounded btn-icon"
+															data-popup="lightbox"><i class="icon-zoomin3"></i></a>
+														<a href="{% url 'edit_lesson_image' lesson.id image.pk %}"
+															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
+																class="icon-pencil5"></i></a>
+														<a href="{% url 'delete_lesson_image' image.pk %}"
+															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
+																class="icon-trash"></i></a>
+													</span>
+												</div>
+											</div>
+
+											<div class="caption">
+												<p>{{image.title}}</p>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</div>
 							</div>
+
+
+
+
 
 							<div class="tab-pane" id="highlighted-justified-tab3">
 								<!-- Inside page title -->
@@ -281,12 +326,16 @@
 										</h6>
 									</div>
 									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="#"><i
+												class="icon-add position-left"></i> Ajouter </a>
 									</div>
-								</div><hr>			
-						<!-- /inside page title -->
+								</div>
+								<hr>
 							</div>
+
+
+
+
 
 							<div class="tab-pane" id="highlighted-justified-tab4">
 								<!-- Inside page title -->
@@ -297,12 +346,17 @@
 										</h6>
 									</div>
 									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="#"><i
+												class="icon-add position-left"></i> Ajouter </a>
 									</div>
-								</div><hr>			
-						<!-- /inside page title -->
+								</div>
+								<hr>
 							</div>
+
+
+
+
+							
 						</div>
 
 					</div>

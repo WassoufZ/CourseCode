@@ -1,5 +1,5 @@
 from django import forms
-from .models import Lesson,Url,Video
+from .models import *
 
 
 class LessonForm(forms.ModelForm):
@@ -28,4 +28,15 @@ class VideoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(VideoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
-        self.fields['video'].widget.attrs={'class':'file-styled'}
+        #self.fields['video'].widget.attrs={'class':'file-styled'}
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = '__all__'
+        exclude = ['lesson']
+    def __init__(self, *args, **kwargs):
+        super(ImageForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
+        #self.fields['image'].widget.attrs={'class':'file-styled'}
+        

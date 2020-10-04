@@ -1,0 +1,72 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% load static %}
+
+
+
+{% block title %} Leçon {% endblock %}
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+
+
+<li class="active">{% trans "Ajouter Un Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
+<div class="row" style="margin-left:0px;">
+    <div>
+        
+        <form method="POST" action="." class="needs-validation" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="panel panel-flat col-md-8">
+                <div class="row" style="margin:1rem;margin-right: -1rem;">
+                    <div class="col-md-7">
+                        <h4>image file</h4>
+                        <p>add your image here, only image formats are allowed.</p><br>
+                        <div class="form-group">
+                            {{form.image}}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'img/leçon/thumb.png'%}" class="img-thumbnail" style="width: 27rem;">
+                    </div>
+                </div>               
+            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title">Image info</h4>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{form.title}}
+                </div>
+                <div class="form-group">
+                    <smal></small>
+
+                </div>
+                <div class="form-group">
+                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Save
+                        </button>
+
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- /static mode -->
+    </div>
+</div>
+
+
+
+{% endblock content_area %}
