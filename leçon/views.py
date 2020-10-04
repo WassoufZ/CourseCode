@@ -88,7 +88,7 @@ def delete_lesson_video(request,pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-def upload_images(request,lesson_id):
+def add_lesson_image(request,lesson_id):
     if request.method == 'POST':
         lesson = Lesson.objects.get(id=lesson_id)
         title = request.POST.get('title')
@@ -99,28 +99,9 @@ def upload_images(request,lesson_id):
             file_path=fs.save(img.name,img)
             image=Image(lesson=lesson,title=title,image=file_path)
             image.save()
-        return HttpResponse('files uploded')
+        return redirect('lesson_info',lesson_id)
 
-    return render (request,'leçon/upload_images.html')
-
-
-
-
-def add_lesson_image(request,lesson_id):
-    lesson = Lesson.objects.get(id=lesson_id)
-    form = ImageForm
-    if request.method == 'POST':
-        form = ImageForm(request.POST,request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.lesson = lesson
-            instance.save()
-            return redirect('lesson_info',lesson_id)
-    context = {
-        'form':form,
-        'lesson':lesson,
-    }
-    return render(request,'leçon/add_lesson_image.html',context)
+    return render (request,'leçon/add_lesson_image.html')
 
 
 def edit_lesson_image(request,lesson_id,pk):

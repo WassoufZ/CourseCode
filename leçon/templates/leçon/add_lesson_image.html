@@ -18,7 +18,7 @@
 
 <div class="row" style="margin-left:0px;">
     <div>
-        
+
         <form method="POST" action="." class="needs-validation" enctype='multipart/form-data'>
             {% csrf_token %}
             <div class="panel panel-flat col-md-8">
@@ -26,14 +26,19 @@
                     <div class="col-md-7">
                         <h4>image file</h4>
                         <p>add your image here, only image formats are allowed.</p><br>
-                        <div class="form-group">
-                            {{form.image}}
-                        </div>
+
                     </div>
                     <div class="col-md-5">
-                        <img src="{% static 'img/leçon/thumb.png'%}" class="img-thumbnail" style="width: 27rem;">
+                        <img id="show" src="{% static 'img/leçon/thumb.png'%}" class="img-thumbnail"
+                            style="width: 27rem;">
                     </div>
-                </div>               
+                    <div class="form-group">
+                        <div id="images">
+                        </div>
+                        <hr>
+                        <input type="button" name="add_image" id="add_image" value="add image">
+                    </div>
+                </div>
             </div>
     </div>
     <div class="col-md-4">
@@ -49,15 +54,17 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label>Title:</label>
-                    {{form.title}}
+                    <input class="form-control" type="text" name="title" required>
+
                 </div>
                 <div class="form-group">
                     <smal></small>
 
                 </div>
                 <div class="form-group">
-                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Save
-                        </button>
+                    <button value="save data" id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple"
+                        type="submit">Save
+                    </button>
 
                 </div>
             </div>
@@ -69,4 +76,34 @@
 
 
 
+
+<script>
+    document.getElementById("add_image").onclick = function (ev) {
+        var image = document.getElementById("images");
+        var preview = document.getElementById('show');
+        var newInput = document.createElement("input");
+        newInput.type = "file";
+        newInput.name = "file[]";
+        newInput.id = "file";
+
+        newInput.onchange = function (ev1) {
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+
+                fileReader.onload = function (ev2) {
+                    preview.src = ev2.target.result;
+
+                };
+                fileReader.readAsDataURL(this.files[0])
+            }
+        };
+
+        image.appendChild(preview);
+        image.appendChild(newInput);
+
+
+
+    }
+
+</script>
 {% endblock content_area %}
