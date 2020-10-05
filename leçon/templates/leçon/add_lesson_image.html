@@ -23,20 +23,30 @@
             {% csrf_token %}
             <div class="panel panel-flat col-md-8">
                 <div class="row" style="margin:1rem;margin-right: -1rem;">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <h4>image file</h4>
                         <p>add your image here, only image formats are allowed..you can add as many images you want just
                             click the plus (+) sign</p><br>
-                        <div>
-                            <button type="button" id="add_image" class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"> Ajouter <i
-                                class="icon-add position-right"></i></button>
+                        <div style="margin: 1rem;">
+                            <button type="button" id="remove_image"
+                                class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"><i
+                                    class="icon-trash position-center"></i></button>
+
+                            <button type="button" id="add_image"
+                                class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"><i
+                                    class="icon-add position-center"></i></button>
                         </div>
+
                     </div>
-                    <div class="col-md-5">
-                        <img id="show" src="{% static 'img/leçon/thumb.png'%}" class="img-thumbnail"
-                            style="width: 27rem; border-radius: 10px;box-shadow:3px 3px 6px gray;display: block;"><br>
-                        <div id="images">
+                    <div class="col-md-6">
+                        <div style="margin: 1rem;">
+                            <img id="show" src="{% static 'img/leçon/thumb.png'%}" class="img-thumbnail"
+                                style="border-radius:10px;box-shadow:3px 3px 6px gray;display:block;"><br>
                         </div>
+                        <div id="images" style="margin: 1rem;">
+
+                        </div>
+
                     </div>
 
                 </div>
