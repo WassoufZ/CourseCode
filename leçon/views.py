@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse
 from django.core.files.storage import FileSystemStorage
-from .forms import LessonForm,VideoForm,ImageForm
+from .forms import *
 from.models import *
 from pathlib import Path
 from django.core.exceptions import ValidationError
@@ -8,13 +8,39 @@ from django.contrib import messages
 
 
 
-# Create your views here.
+
+
+
 def view_lessons(request):
     lessons = Lesson.objects.all()
     context={
         'lessons':lessons,
     }
     return render(request,'leçon/view_lessons.html',context)
+
+#===========================lesson section=====================
+
+def lesson_info(request,pk):
+    lesson = Lesson.objects.get(pk=pk)
+    videos = Video.objects.filter(lesson=lesson)
+    images = Image.objects.filter(lesson=lesson)
+    documents = Document.objects.filter(lesson=lesson)
+
+    form = LessonForm(instance=lesson)
+    if request.method == 'POST' and 'LessonForm' in request.POST:
+        form = LessonForm(request.POST,instance=lesson)
+        if form.is_valid:
+            form.save()
+            return redirect('lesson_info',lesson.id)
+    context={
+        'lesson':lesson,
+        'form':form,
+        'videos':videos,
+        'images':images,
+        'documents':documents,
+        }
+    return render(request,'leçon/lesson_info.html',context)
+
 
 def add_lesson(request):
     form = LessonForm
@@ -34,25 +60,9 @@ def delete_lesson(request,pk):
     lesson.delete()
     return redirect('view_lessons')
 
-def lesson_info(request,pk):
-    lesson = Lesson.objects.get(pk=pk)
-    videos = Video.objects.filter(lesson=lesson)
-    images = Image.objects.filter(lesson=lesson)
 
-    form = LessonForm(instance=lesson)
-    if request.method == 'POST' and 'LessonForm' in request.POST:
-        form = LessonForm(request.POST,instance=lesson)
-        if form.is_valid:
-            form.save()
-            return redirect('lesson_info',lesson.id)
-    context={
-        'lesson':lesson,
-        'form':form,
-        'videos':videos,
-        'images':images,
-        }
-    return render(request,'leçon/lesson_info.html',context)
 
+#==============================lesson videos section=================
 
 def add_lesson_video(request,lesson_id):
     lesson = Lesson.objects.get(id=lesson_id)
@@ -93,28 +103,26 @@ def delete_lesson_video(request,pk):
 
 
 
-
-
+#==========================lesson images section=========================
 
 def add_lesson_image(request,lesson_id):
     if request.method == 'POST':
         lesson = Lesson.objects.get(id=lesson_id)
         title = request.POST.get('title')
         images = request.FILES.getlist("file[]")
-        allowed = ['.jpg','.png','jpeg']
+        allowed = ['.jpg','.png','jpeg']            #list of the allowed images formats
         valid = []
-        print(images)
         for img in images:
-            if Path(str(img)).suffix in allowed:
+            if Path(str(img)).suffix in allowed:    #filtering the images  by valid formats
                 valid.append(img)
             else:
                 messages.warning(request, f"l'extension de fichier '{img}' et n'est pas autorisée")
-        for img in valid:
+        for img in valid:                           #saving images one by one
             fs = FileSystemStorage()
             file_path=fs.save(img.name,img)
             image=Image(lesson=lesson,title=title,image=file_path)
             image.save()
-        if len(valid) > 0:
+        if len(valid) > 0:                          #checking if the user input if has valid images
             messages.success(request, "Les images a été enregistrées.")
         else: 
             messages.success(request, "aucune image ajoutée")
@@ -123,21 +131,21 @@ def add_lesson_image(request,lesson_id):
     return render (request,'leçon/add_lesson_image.html')
 
 
-#def edit_lesson_image(request,lesson_id,pk):
-#    lesson = Lesson.objects.get(id=lesson_id)
-#    image = Image.objects.get(pk=pk)
-#    form = ImageForm(instance=image)
-#    if request.method == 'POST':
-#        form = ImageForm(request.POST,request.FILES,instance=image)
-#        if form.is_valid():
-#            form.save()
-#            return redirect('lesson_info',lesson_id)
-#    context = {
-#        'form':form,
-#      'lesson':lesson,
-#   }
-#    return render(request,'leçon/add_lesson_image.html',context)
-
+def edit_lesson_image(request,lesson_id,pk):
+    lesson = Lesson.objects.get(id=lesson_id)
+    image = Image.objects.get(pk=pk)
+    form = ImageForm(instance=image)
+    if request.method == 'POST':
+        form = ImageForm(request.POST,request.FILES,instance=image)
+        if form.is_valid():
+            form.save()
+            return redirect('lesson_info',lesson_id)
+    context = {
+    'form':form,
+    'lesson':lesson,
+    'image':image,
+   }
+    return render(request,'leçon/edit_lesson_image.html',context)
 
 
 def delete_lesson_image(request,pk):
@@ -146,22 +154,45 @@ def delete_lesson_image(request,pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-def upload_images(request,lesson_id):
-    return render (request,'leçon/upload_images.html')
+#==========================lesson documents section=========================
 
-
-    '''
+def add_lesson_document(request,lesson_id):
     lesson = Lesson.objects.get(id=lesson_id)
-    form = ImageForm
+    form = DocumentForm()
     if request.method == 'POST':
-        form = ImageForm(request.POST,request.FILES)
+        form = DocumentForm(request.POST,request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.lesson = lesson
             instance.save()
+
+            messages.success(request, "Le document a été enregistrées.")
             return redirect('lesson_info',lesson_id)
     context = {
-        'form':form,
-        'lesson':lesson,
-    }
-    return render(request,'leçon/add_lesson_image.html',context)'''
+    'form':form,
+    'lesson':lesson,
+   }
+    return render(request,'leçon/add_lesson_document.html',context)
+
+def edit_lesson_document(request,lesson_id,pk):
+    lesson = Lesson.objects.get(id=lesson_id)
+    document = Document.objects.get(pk=pk)
+    form = DocumentForm(instance=document)
+    if request.method == 'POST':
+        form = DocumentForm(request.POST,request.FILES,instance=document)
+        if form.is_valid():
+            form.save()
+            return redirect('lesson_info',lesson_id)
+    context = {
+    'form':form,
+    'lesson':lesson,
+   }
+    return render(request,'leçon/add_lesson_document.html',context)
+
+
+def delete_lesson_document(request,pk):
+    document = Document.objects.get(pk=pk)
+    document.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+

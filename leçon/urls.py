@@ -14,8 +14,11 @@ urlpatterns = [
     url(r'^delete_lesson_video/(\d+)/$', views.delete_lesson_video, name="delete_lesson_video"),  
   
     url(r'^lesson_info/(\d+)/add_lesson_image/$', views.add_lesson_image, name="add_lesson_image"),
-    #url(r'^lesson_info/(\d+)/edit_lesson_image/(\d+)/$', views.edit_lesson_image, name="edit_lesson_image"),  
+    url(r'^lesson_info/(\d+)/edit_lesson_image/(\d+)/$', views.edit_lesson_image, name="edit_lesson_image"),  
     url(r'^delete_lesson_image/(\d+)/$', views.delete_lesson_image, name="delete_lesson_image"),
 
+    url(r'^lesson_info/(\d+)/add_lesson_document/$', views.add_lesson_document, name="add_lesson_document"),
+    url(r'^lesson_info/(\d+)/edit_lesson_document/(\d+)/$', views.edit_lesson_document, name="edit_lesson_document"),  
+    url(r'^delete_lesson_document/(\d+)/$', views.delete_lesson_document, name="delete_lesson_document"),
  
 ]

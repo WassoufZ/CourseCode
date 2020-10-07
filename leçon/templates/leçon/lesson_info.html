@@ -25,7 +25,7 @@
 
 <!-- Grid -->
 <div class="row">
-	
+
 
 	<div class="col-md-4">
 
@@ -262,7 +262,10 @@
 											<div class="video-container">
 												<video controls play style="width: 31rem;">
 													<source src="{{video.video.url}}">
-												</video> </div>
+												</video>
+											</div>
+
+
 
 											<div class="caption">
 												<h6 class="no-margin"><a href="#"
@@ -281,10 +284,6 @@
 									{% endfor %}
 								</div>
 							</div>
-
-
-
-
 							<div class="tab-pane" id="highlighted-justified-tab2">
 								<!-- Inside page title -->
 								<div class="page-header-content">
@@ -294,7 +293,8 @@
 										</h6>
 									</div>
 									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="{% url 'add_lesson_image' lesson.id %}"><i
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="{% url 'add_lesson_image' lesson.id %}"><i
 												class="icon-add position-left"></i> Ajouter </a>
 									</div>
 								</div>
@@ -310,9 +310,10 @@
 														<a href="{{image.image.url}}"
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"
 															data-popup="lightbox"><i class="icon-zoomin3"></i></a>
-														<!--<a href="#"
+														<a href="{% url 'edit_lesson_image' lesson.pk image.pk %}"
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
-																class="icon-pencil5"></i></a>-->
+																class="icon-pencil5"></i></a>
+
 														<a href="{% url 'delete_lesson_image' image.pk %}"
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
 																class="icon-trash"></i></a>
@@ -329,10 +330,6 @@
 								</div>
 							</div>
 
-
-
-
-
 							<div class="tab-pane" id="highlighted-justified-tab3">
 								<!-- Inside page title -->
 								<div class="page-header-content">
@@ -342,17 +339,29 @@
 										</h6>
 									</div>
 									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="#"><i
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="{% url 'add_lesson_document' lesson.id %}"><i
 												class="icon-add position-left"></i> Ajouter </a>
 									</div>
 								</div>
 								<hr>
+								{% for document in documents %}
+								<div class="panel panel-white">
+									<div class="panel-heading">
+										<h6 class="panel-title">{{document.title}}</h6>
+										<div class="heading-elements">
+											<ul class="icons-list">
+												<li><a href="{{document.document.url}}" target="new" ><i class="glyphicon glyphicon-eye-open"></i></a></li>
+												<li><a href="{% url 'edit_lesson_document' lesson.pk document.pk%}"><i class="glyphicon glyphicon-edit"></i></a></li>
+												<li><a href="{% url 'delete_lesson_document' document.pk %}"><i class="glyphicon glyphicon-trash"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+									
+								{% endfor %}
 							</div>
 
-
-
-
-
+							
 							<div class="tab-pane" id="highlighted-justified-tab4">
 								<!-- Inside page title -->
 								<div class="page-header-content">
@@ -372,7 +381,7 @@
 
 
 
-							
+
 						</div>
 
 					</div>

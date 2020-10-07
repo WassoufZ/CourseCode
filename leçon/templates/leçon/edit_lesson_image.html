@@ -1,0 +1,92 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% load static %}
+
+
+
+{% block title %} Leçon {% endblock %}
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+
+
+<li class="active">{% trans "Ajouter Un Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+<link href="{% static 'css/leçon.css' %}" rel="stylesheet" type="text/css" />
+
+<div class="row" style="margin-left:0px;">
+    <div>
+
+        <form method="POST" action="." class="needs-validation" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="panel panel-flat col-md-8">
+                <div class="row" style="margin:1rem;margin-right: -1rem;">
+                    <div class="col-md-6">
+                        <h4>image file</h4>
+                        <p>add your image here, only image formats are allowed..you can add as many images you want just
+                            click the plus (+) sign</p><br>
+                        <div style="margin: 1rem;">
+                            {{form.image}}
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div style="margin: 1rem;">
+                            <img id="show" src="{{image.image.url}}" class="img-thumbnail"
+                                style="border-radius:10px;box-shadow:3px 3px 6px gray;display:block;"><br>
+                        </div>
+                        <div id="images" style="margin: 1rem;">
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Image info</h4>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li><a data-action="collapse"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Title:</label>
+                            {{form.title}}
+                        </div>
+                        <div class="form-group">
+                            <button value="save data" id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple"
+                                type="submit">Save
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- /static mode -->
+    </div>
+</div>
+
+<script>
+var newInput = document.getElementById('id_image');
+var preview = document.getElementById('show');
+newInput.onchange = function (ev1) {
+        if (this.files && this.files[0]) {
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (ev2) {
+                preview.src = ev2.target.result;
+            };
+            fileReader.readAsDataURL(this.files[0])
+        }
+    };
+</script>
+{% endblock content_area %}
