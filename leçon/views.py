@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse,reverse
 from django.core.files.storage import FileSystemStorage
 from .forms import *
 from.models import *
@@ -25,19 +25,35 @@ def lesson_info(request,pk):
     videos = Video.objects.filter(lesson=lesson)
     images = Image.objects.filter(lesson=lesson)
     documents = Document.objects.filter(lesson=lesson)
+    urls = Url.objects.filter(lesson=lesson)
+
 
     form = LessonForm(instance=lesson)
+    form1 = UrlForm
+
+
     if request.method == 'POST' and 'LessonForm' in request.POST:
         form = LessonForm(request.POST,instance=lesson)
         if form.is_valid:
             form.save()
             return redirect('lesson_info',lesson.id)
+
+    if request.method == 'POST' and 'UrlForm' in request.POST:
+        form = UrlForm(request.POST)
+        if form.is_valid:
+            instance = form.save(commit=False)
+            instance.lesson = lesson
+            instance.save()
+            messages.success(request, "Url a été enregistrées.")
+            return redirect('lesson_info',lesson.id)
     context={
         'lesson':lesson,
         'form':form,
+        'form1':form1,
         'videos':videos,
         'images':images,
         'documents':documents,
+        'urls':urls,
         }
     return render(request,'leçon/lesson_info.html',context)
 
@@ -47,8 +63,8 @@ def add_lesson(request):
     if request.method == 'POST':
         form = LessonForm(request.POST)
         if form.is_valid:
-            form.save()
-            return redirect('view_lessons')
+            new_lesson = form.save()
+            return HttpResponseRedirect(reverse(lesson_info, args=(new_lesson.pk,)))
     context = {
         'form':form,
     }
@@ -194,5 +210,12 @@ def delete_lesson_document(request,pk):
     document = Document.objects.get(pk=pk)
     document.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+#==========================lesson documents delete=========================
+def delete_lesson_url(request,pk):
+    url = Url.objects.get(pk=pk)
+    url.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 
 

@@ -10,7 +10,7 @@ class Lesson(models.Model):
     skill = models.CharField(max_length=200)
     vacations = models.IntegerField()
     link = models.CharField(max_length=700)
-    remarques = models.TextField()
+    remarques = models.TextField(null=True,blank=True)
     order = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now=True)
@@ -20,7 +20,7 @@ class Lesson(models.Model):
         return self.level_id
 
 class Video(models.Model):
-    lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE,blank=True,null=True)
+    lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     video = models.FileField(validators=[validate_file_extension])
     def __str__(self):
@@ -47,6 +47,6 @@ class Document(models.Model):
 class Url(models.Model):
     lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    link = models.CharField(max_length=200)
+    link = models.URLField(max_length=200)
     def __str__(self):
         return self.title

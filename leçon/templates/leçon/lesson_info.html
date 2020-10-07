@@ -32,18 +32,19 @@
 		<!-- Horizontal form -->
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h5 class="panel-title">Leçon info</h5>
+				<h4 class="panel-title" style="font-weight: 500;">Leçon</h4>
 				<div class="heading-elements">
 					<ul class="icons-list">
 						<li><a href="#" data-toggle="modal" data-target="#modal_form_vertical"><i
-									class="glyphicon glyphicon-edit"></i></a></li>
+									class="glyphicon glyphicon-edit" style="font-size: 20px;"></i></a></li>
 						<!-- Vertical form modal -->
 						<div id="modal_form_vertical" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h5 class="modal-title">Edit Leçon</h5>
+										<h5 class="modal-title">
+											Modifier Leçon</h5>
 									</div>
 									<div class="panel-body">
 
@@ -52,12 +53,14 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Level ID:</h6>
 														{{ form.level_id }}
 													</div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Subject ID:</h6>
 														{{ form.subject_id }}
 													</div>
 												</div>
@@ -66,11 +69,15 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Chapiter:</h6>
+
 														{{ form.chapiter }} </div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Lesson:</h6>
+
 														{{ form.lesson }} </div>
 												</div>
 											</div>
@@ -78,11 +85,15 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Skill:</h6>
+
 														{{ form.skill }} </div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Vacations:</h6>
+
 														{{ form.vacations }} </div>
 												</div>
 											</div>
@@ -90,17 +101,23 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Link:</h6>
+
 														{{ form.link }} </div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Order:</h6>
+
 														{{ form.order }} </div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
+														<h6 class="text-muted text-size-small">Remarques:</h6>
+
 														{{ form.remarques }} </div>
 												</div>
 
@@ -111,8 +128,8 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-
-															<h6 style="font-weight: 500;">Visible: {{ form.state }}</h6>
+															<h6 class="text-muted">Visible:{{ form.state }}</h6>
+															
 														</div>
 													</div>
 												</div>
@@ -120,9 +137,9 @@
 
 												<div class="modal-footer">
 													<button type="button" class="btn btn-link"
-														data-dismiss="modal">Close</button>
+														data-dismiss="modal">Annuler</button>
 													<button type="submit" class="btn btn-primary"
-														name="LessonForm">Save</button>
+														name="LessonForm">Enregistrer</button>
 												</div>
 										</form>
 									</div>
@@ -159,7 +176,7 @@
 
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Lesson:</label>
+							<label style="font-weight: 500;">Leçon:</label>
 							{{ lesson.lesson }} </div>
 					</div>
 				</div>
@@ -167,7 +184,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Skill:</label>
+							<label style="font-weight: 500;">Compétence:</label>
 							{{ lesson.skill }} </div>
 					</div>
 
@@ -181,13 +198,13 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Link:</label>
+							<label style="font-weight: 500;">Lien:</label>
 							{{ lesson.link }} </div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Order:</label>
+							<label style="font-weight: 500;">Arrangement:</label>
 							{{ lesson.order }} </div>
 					</div>
 				</div>
@@ -202,14 +219,22 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label style="font-weight: 500;">Visible:</label>
-							{{ lesson.state }} </div>
+							<label style="font-weight: 500;">Visible: </label>
+							{% if lesson.state == True %}
+						     <i class="icon-eye"></i>
+							{% else %}
+							 <i class="icon-eye-blocked"></i>
+							{% endif %}
+						
+						
+						</div>
 					</div>
 
 				</div>
 			</div>
 		</div>
 		<!-- /horizotal form -->
+
 
 	</div>
 
@@ -218,7 +243,7 @@
 		<!-- Vertical form -->
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h5 class="panel-title">Leçon media</h5>
+				<h5 class="panel-title" style="font-weight: 500;">Médias</h5>
 				<div class="heading-elements">
 					<ul class="icons-list">
 						<li><a data-action="collapse"></a></li>
@@ -230,32 +255,31 @@
 				<div class="panel-body">
 					<div class="tabbable">
 						<ul class="nav nav-tabs nav-tabs-highlight nav-justified">
-							<li class="active"><a href="#highlighted-justified-tab1" data-toggle="tab">videos</a></li>
+							<li class="active"><a href="#highlighted-justified-tab1" data-toggle="tab">vidéos</a></li>
 							<li><a href="#highlighted-justified-tab2" data-toggle="tab">images</a></li>
 							<li><a href="#highlighted-justified-tab3" data-toggle="tab">documents</a></li>
-							<li><a href="#highlighted-justified-tab4" data-toggle="tab">urls</a></li>
+							<li><a href="#highlighted-justified-tab4" data-toggle="tab">liens</a></li>
 						</ul>
 
 						<div class="tab-content">
 							<div class="tab-pane active" id="highlighted-justified-tab1">
 
-
-
 								<!-- Inside page title -->
-								<div class="page-header-content">
-									<div>
-										<h6>
-											videos list:
-										</h6>
-									</div>
-									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+									<div class="breadcrumb-line breadcrumb-line-component">
+										<ul class="breadcrumb">
+											<i class="icon-video-camera3" style="font-size: 34px;"></i>
+										</ul>
+				
+										<ul style="float: right;margin: 1rem;">
+											<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
 											href="{% url 'add_lesson_video' lesson.id %}"><i
 												class="icon-add position-left"></i> Ajouter </a>
+										</ul>
 									</div>
-								</div>
-								<hr>
+
+									
 								<div class="row">
+									<br>
 									{% for video in videos %}
 									<div class="col-lg-6 col-sm-6">
 										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
@@ -264,9 +288,6 @@
 													<source src="{{video.video.url}}">
 												</video>
 											</div>
-
-
-
 											<div class="caption">
 												<h6 class="no-margin"><a href="#"
 														class="text-default">{{video.title}}</a>
@@ -286,20 +307,19 @@
 							</div>
 							<div class="tab-pane" id="highlighted-justified-tab2">
 								<!-- Inside page title -->
-								<div class="page-header-content">
-									<div>
-										<h6>
-											Images list:
-										</h6>
-									</div>
-									<div class="heading-elements">
+								<div class="breadcrumb-line breadcrumb-line-component">
+									<ul class="breadcrumb">
+										<i class="icon-images3" style="font-size: 34px;"></i>
+									</ul>
+			
+									<ul style="float: right;margin: 1rem;">
 										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="{% url 'add_lesson_image' lesson.id %}"><i
-												class="icon-add position-left"></i> Ajouter </a>
-									</div>
+										href="{% url 'add_lesson_image' lesson.id %}"><i
+											class="icon-add position-left"></i> Ajouter </a>
+									</ul>
 								</div>
-								<hr>
 								<div class="row">
+									<br>
 									{% for image in images%}
 									<div class="col-md-4">
 										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;height: 23rem;">
@@ -332,50 +352,113 @@
 
 							<div class="tab-pane" id="highlighted-justified-tab3">
 								<!-- Inside page title -->
-								<div class="page-header-content">
-									<div>
-										<h6>
-											Documents list:
-										</h6>
-									</div>
-									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="{% url 'add_lesson_document' lesson.id %}"><i
-												class="icon-add position-left"></i> Ajouter </a>
-									</div>
+								<div class="breadcrumb-line breadcrumb-line-component">
+									<ul class="breadcrumb">
+										<i class="icon-files-empty2" style="font-size: 34px;"></i>
+									</ul>
+			
+									<ul style="float: right;margin: 1rem;">
+										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+										href="{% url 'add_lesson_document' lesson.id %}"><i
+											class="icon-add position-left"></i> Ajouter </a>
+									</ul>
 								</div>
-								<hr>
+								<br>
 								{% for document in documents %}
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h6 class="panel-title">{{document.title}}</h6>
 										<div class="heading-elements">
 											<ul class="icons-list">
-												<li><a href="{{document.document.url}}" target="new" ><i class="glyphicon glyphicon-eye-open"></i></a></li>
-												<li><a href="{% url 'edit_lesson_document' lesson.pk document.pk%}"><i class="glyphicon glyphicon-edit"></i></a></li>
-												<li><a href="{% url 'delete_lesson_document' document.pk %}"><i class="glyphicon glyphicon-trash"></i></a></li>
+												<li><a href="{{document.document.url}}" target="new"><i
+															class="glyphicon glyphicon-eye-open"></i></a></li>
+												<li><a href="{% url 'edit_lesson_document' lesson.pk document.pk%}"><i
+															class="glyphicon glyphicon-edit"></i></a></li>
+												<li><a href="{% url 'delete_lesson_document' document.pk %}"><i
+															class="glyphicon glyphicon-trash"></i></a></li>
 											</ul>
 										</div>
 									</div>
 								</div>
-									
+
 								{% endfor %}
 							</div>
 
-							
+
 							<div class="tab-pane" id="highlighted-justified-tab4">
 								<!-- Inside page title -->
-								<div class="page-header-content">
-									<div>
-										<h6>
-											Urls list:
-										</h6>
-									</div>
-									<div class="heading-elements">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="#"><i
-												class="icon-add position-left"></i> Ajouter </a>
+								<div class="breadcrumb-line breadcrumb-line-component">
+									<ul class="breadcrumb">
+										<i class="icon-link2" style="font-size: 34px;"></i>
+									</ul>
+			
+									<ul style="float: right;margin: 1rem;">
+										<a data-toggle="modal" data-target="#modal_form_vertical2"
+											class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+											href="#"><i class="icon-add position-left"></i> Ajouter </a>
+
+									</ul>
+								</div>
+
+								
+										<div id="modal_form_vertical2" class="modal fade">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close"
+															data-dismiss="modal">&times;</button>
+														<h5 class="modal-title">Add Urls</h5>
+													</div>
+
+													<form action="." method="POST">
+														{% csrf_token %}
+														<div class="modal-body">
+															<div class="form-group">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<label>Titre:</label>
+																		{{form1.title}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<label>Lien:</label>
+																		{{form1.link}}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-link"
+																data-dismiss="modal">Annuler</button>
+															<button name="UrlForm" type="submit"
+																class="btn btn-primary">Enregistrer</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- /vertical form modal -->
+										<br>
+								{% for url in urls %}
+								<div class="panel panel-white">
+									<div class="panel-heading">
+										<h6 class="panel-title">{{url.title}}</h6>
+										
+										<div class="heading-elements">
+											<ul class="icons-list">
+												<li><a href="{{ url.link }}" target="new"><i
+															class="glyphicon glyphicon-eye-open"></i></a></li>
+												<li><a href="{% url 'delete_lesson_url' url.pk%}"><i
+															class="glyphicon glyphicon-trash"></i></a></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-								<hr>
+
+								{% endfor %}
 							</div>
 
 

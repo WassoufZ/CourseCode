@@ -20,5 +20,8 @@ urlpatterns = [
     url(r'^lesson_info/(\d+)/add_lesson_document/$', views.add_lesson_document, name="add_lesson_document"),
     url(r'^lesson_info/(\d+)/edit_lesson_document/(\d+)/$', views.edit_lesson_document, name="edit_lesson_document"),  
     url(r'^delete_lesson_document/(\d+)/$', views.delete_lesson_document, name="delete_lesson_document"),
+
+    url(r'^delete_lesson_url/(\d+)/$', views.delete_lesson_url, name="delete_lesson_url"),
+
  
 ]

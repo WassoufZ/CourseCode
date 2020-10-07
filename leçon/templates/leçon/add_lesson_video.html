@@ -22,19 +22,25 @@
             {% csrf_token %}
             <div class="panel panel-flat col-md-8">
                 <div class="row" style="margin:1rem;margin-right: -1rem;">
-                    <div class="col-md-7">
-                        <h4>Video file</h4>
-                        <p>add your video here, only video formats are allowed</p><br>
-                        <div class="form-group">
+                    <div class="col-md-6">
+                        <h4>
+                            Fichier Vidéo</h4>
+                        <p>
+                            ajoutez votre vidéo ici, seuls les formats vidéo sont autorisés</p><br>
+                        <div style="margin: 1rem;">
                             {{form.video}}
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <img src="{% static 'img/leçon/video.jpg'%}" class="img-thumbnail" style="width: 27rem; border-radius: 10px;box-shadow:3px 3px 6px gray;display:block;">
+                    <div class="col-md-6">
+                        <div style="margin: 1rem;">
+                            <img id="show" src="{% static 'img/leçon/video.jpg'%}" class="img-thumbnail"
+                                style="border-radius:10px;box-shadow:3px 3px 6px gray;display:block;"><br>
+                        </div>
+
                     </div>
                 </div>
                 <div class="panel-body d-none" id="progressdiv">
-                    <div >
+                    <div>
                         <div>
                             <div class="progress" style="height: 2rem;">
                                 <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
@@ -51,7 +57,8 @@
         <!-- Static mode -->
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h4 class="panel-title">video info</h4>
+                <h4 class="panel-title">Additional Info
+                </h4>
                 <div class="heading-elements">
                     <ul class="icons-list">
                         <li><a data-action="collapse"></a></li>
@@ -60,7 +67,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label>Title:</label>
+                    <label>Titre:</label>
                     {{form.title}}
                 </div>
                 <div class="form-group">
@@ -68,10 +75,9 @@
 
                 </div>
                 <div class="form-group">
-                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Save
-                        Course</button>
+                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Télécharger</button>
                     <button id="loading_btn" style="width: 100%;" class="btn btn-success d-none" type="button"
-                        disabled>Uploading...</button>
+                        disabled>Téléchargement...</button>
                 </div>
             </div>
         </div>
@@ -117,15 +123,13 @@
 
         <div class="sa-button-container">
             <div class="sa-confirm-button-container">
-                <a href="{% url 'lesson_info' lesson.id %}"><button class="confirm" tabindex="1"
-                    style="display: inline-block; background-color:
+                <a href="{% url 'lesson_info' lesson.id %}"><button class="confirm" tabindex="1" style="display: inline-block; background-color:
                     #1F8EE7; box-shadow: 
                     #1F8EE7 0px 0px 2px
                      , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Back to lesson</button></a>
             </div>
             <div class="sa-confirm-button-container">
-                <a href="{% url 'add_lesson_video' lesson.id %}"><button class="confirm" tabindex="1"
-                    style="display: inline-block; background-color:
+                <a href="{% url 'add_lesson_video' lesson.id %}"><button class="confirm" tabindex="1" style="display: inline-block; background-color:
                      rgb(102, 187, 106); box-shadow: 
                      rgba(102, 187, 106, 0.8) 0px 0px 2px
                      , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Upload again</button></a>

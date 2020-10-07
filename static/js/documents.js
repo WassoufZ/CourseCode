@@ -1,5 +1,5 @@
 function check_ex() {
-    var list = ['pdf', 'docx', 'doc', 'xml', 'xlsx']
+    var list = ['pdf', 'docx', 'doc', 'xml', 'xlsx','rar']
     var fullPath = document.getElementById("id_document").value;
     if (fullPath) {
         var startIndex =
@@ -12,7 +12,7 @@ function check_ex() {
         }
         var x = filename.split('.').pop();
         if (list.includes(x) == false) {
-            alert(x + ' format is not allowed, use only files with (word,exel,pdf) extensions');
+            alert(x + ' format is not allowed, use only files with (word,exel,pdf,rar) extensions');
             location.reload()
         };
 

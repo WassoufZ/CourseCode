@@ -49,4 +49,13 @@ class DocumentForm(forms.ModelForm):
         super(DocumentForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
         #self.fields['image'].widget.attrs={'class':'file-styled'}
-        
+
+class   UrlForm(forms.ModelForm):
+    class Meta:
+        model = Url
+        fields = '__all__'
+        exclude = ['lesson']
+    def __init__(self, *args, **kwargs):
+        super(UrlForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
+        self.fields['link'].widget.attrs={'class':'form-control','placeholder': 'Url'}        
