@@ -15,32 +15,18 @@
 	<div class="col-md-12">		
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h4 class="panel-title"> {% trans "leçons" %}  </h4>
-
+				<h4 class="panel-title"> {% trans "Résultat" %}  </h4>
 				<div class="heading-elements">
-					
-				<div class="col-md-8">
-					<form action="{% url 'search' %}" method="GET">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Recherche" name="q" required>
-							<span class="input-group-btn">
-								<button class="btn btn-default legitRipple" type="submit"><i class="icon-search4"></i></button>
-							</span>
-						</div>
-					</form>
-				</div>
-
-
 		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
-		        		href="{% url 'add_lesson'%}" 
-		            ><i class="icon-add position-left"></i> {% trans "Ajouter" %}   </a>	        	
+		        		href="{% url 'view_lessons_list'%}" 
+		            ><i class="icon-arrow-left52 position-left"></i> {% trans "Retour" %}   </a>	        	
 		    	</div>
 			</div>				
 		</div>
 	</div>
 </div>
 
-{% for lesson in lessons %}
+{% for lesson in object_list %}
 <!-- Multiple icons -->
 <div class="panel panel-white">
 	<div class="panel-heading">

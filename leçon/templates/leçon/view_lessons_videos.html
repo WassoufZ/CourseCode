@@ -1,0 +1,53 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% block title %} Leçon {% endblock %}
+
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+<li class="active">{% trans "Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title"> {% trans "vidéos" %} </h4>
+                <div class="heading-elements">
+                    <i class="icon-video-camera3" style="font-size: 34px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-content">
+    <div class="tab-pane active" id="highlighted-justified-tab1">
+        <div class="row">
+            <br>
+            {% for video in videos %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
+                    <div class="video-container">
+                        <video controls play style="width: 100%">
+                            <source src="{{video.video.url}}">
+                        </video>
+                    </div>
+                    <div class="caption">
+                        <h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
+                            <a href="{% url 'view_lesson' video.lesson.pk %}" class="text-muted"><i
+                                    class="glyphicon glyphicon-eye-open pull-right" style="margin-left:1rem;"></i></a>
+                        </h6>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- /multiple icons -->
+{% endblock content_area %}

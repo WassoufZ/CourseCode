@@ -5,7 +5,7 @@
 {% block hierarchy %}
 <li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
 <li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
-<li class="active">{% trans "Edit Leçons" %} </li>
+<li class="active">{% trans "Leçon" %} </li>
 {% endblock %}
 
 {% block content_area %}
@@ -293,7 +293,7 @@
 									<div class="col-lg-6 col-sm-6">
 										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
 											<div class="video-container">
-												<video controls play style="width: 31rem;">
+												<video controls play style="width:100%;">
 													<source src="{{video.video.url}}">
 												</video>
 											</div>

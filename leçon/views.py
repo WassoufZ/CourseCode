@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse,reverse
 from django.core.files.storage import FileSystemStorage
+from django.views.generic import ListView
+from django.db.models import Q
 from .forms import *
 from.models import *
 from pathlib import Path
@@ -9,7 +11,7 @@ from django.contrib import messages
 
 
 
-
+#===========================lesson section=====================
 
 def view_lessons_list(request):
     lessons = Lesson.objects.all()
@@ -18,6 +20,20 @@ def view_lessons_list(request):
     }
     return render(request,'leçon/view_lessons_list.html',context)
 
+def view_lessons_videos(request):
+    videos = Video.objects.all()
+    context={
+        'videos':videos,
+    }
+    return render(request,'leçon/view_lessons_videos.html',context)
+
+class SearchView(ListView):
+    model = Lesson
+    template_name = 'leçon/search_view.html'
+    def get_queryset(self):
+        word = self.request.GET.get('q')
+        object_list = Lesson.objects.filter(Q(chapiter__icontains=word)|Q(lesson__icontains=word))
+        return object_list
 
 def view_lesson(request,pk):
     lesson = Lesson.objects.get(pk=pk)
@@ -34,7 +50,6 @@ def view_lesson(request,pk):
         }
     return render(request,'leçon/view_lesson.html',context)
 
-#===========================lesson section=====================
 
 def edit_lesson(request,pk):
     lesson = Lesson.objects.get(pk=pk)
@@ -92,8 +107,6 @@ def delete_lesson(request,pk):
     lesson.delete()
     return redirect('view_lessons_list')
 
-
-
 #==============================lesson videos section=================
 
 def add_lesson_video(request,lesson_id):
@@ -134,7 +147,6 @@ def delete_lesson_video(request,pk):
 
 
 
-
 #==========================lesson images section=========================
 
 def add_lesson_image(request,lesson_id):
@@ -145,7 +157,7 @@ def add_lesson_image(request,lesson_id):
         allowed = ['.jpg','.png','jpeg']            #list of the allowed images formats
         valid = []
         for img in images:
-            if Path(str(img)).suffix in allowed:    #filtering the images  by valid formats
+            if Path(str(img)).suffix in allowed:    #filtering the images by valid formats
                 valid.append(img)
             else:
                 messages.warning(request, f"l'extension de fichier '{img}' et n'est pas autorisée")
@@ -154,7 +166,7 @@ def add_lesson_image(request,lesson_id):
             file_path=fs.save(img.name,img)
             image=Image(lesson=lesson,title=title,image=file_path)
             image.save()
-        if len(valid) > 0:                          #checking if the user input if has valid images
+        if len(valid) > 0:                          #checking if the user input has valid images
             messages.success(request, "Les images a été enregistrées.")
         else: 
             messages.success(request, "aucune image ajoutée")
