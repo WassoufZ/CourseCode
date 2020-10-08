@@ -11,16 +11,32 @@ from django.contrib import messages
 
 
 
-def view_lessons(request):
+def view_lessons_list(request):
     lessons = Lesson.objects.all()
     context={
         'lessons':lessons,
     }
-    return render(request,'leçon/view_lessons.html',context)
+    return render(request,'leçon/view_lessons_list.html',context)
+
+
+def view_lesson(request,pk):
+    lesson = Lesson.objects.get(pk=pk)
+    videos = Video.objects.filter(lesson=lesson)
+    images = Image.objects.filter(lesson=lesson)
+    documents = Document.objects.filter(lesson=lesson)
+    urls = Url.objects.filter(lesson=lesson)
+    context={
+        'lesson':lesson,
+        'videos':videos,
+        'images':images,
+        'documents':documents,
+        'urls':urls,
+        }
+    return render(request,'leçon/view_lesson.html',context)
 
 #===========================lesson section=====================
 
-def lesson_info(request,pk):
+def edit_lesson(request,pk):
     lesson = Lesson.objects.get(pk=pk)
     videos = Video.objects.filter(lesson=lesson)
     images = Image.objects.filter(lesson=lesson)
@@ -36,7 +52,7 @@ def lesson_info(request,pk):
         form = LessonForm(request.POST,instance=lesson)
         if form.is_valid:
             form.save()
-            return redirect('lesson_info',lesson.id)
+            return redirect('edit_lesson',lesson.id)
 
     if request.method == 'POST' and 'UrlForm' in request.POST:
         form = UrlForm(request.POST)
@@ -45,7 +61,7 @@ def lesson_info(request,pk):
             instance.lesson = lesson
             instance.save()
             messages.success(request, "Url a été enregistrées.")
-            return redirect('lesson_info',lesson.id)
+            return redirect('edit_lesson',lesson.id)
     context={
         'lesson':lesson,
         'form':form,
@@ -55,7 +71,7 @@ def lesson_info(request,pk):
         'documents':documents,
         'urls':urls,
         }
-    return render(request,'leçon/lesson_info.html',context)
+    return render(request,'leçon/edit_lesson.html',context)
 
 
 def add_lesson(request):
@@ -64,7 +80,7 @@ def add_lesson(request):
         form = LessonForm(request.POST)
         if form.is_valid:
             new_lesson = form.save()
-            return HttpResponseRedirect(reverse(lesson_info, args=(new_lesson.pk,)))
+            return HttpResponseRedirect(reverse(edit_lesson, args=(new_lesson.pk,)))
     context = {
         'form':form,
     }
@@ -74,7 +90,7 @@ def add_lesson(request):
 def delete_lesson(request,pk):
     lesson = Lesson.objects.get(pk=pk)
     lesson.delete()
-    return redirect('view_lessons')
+    return redirect('view_lessons_list')
 
 
 
@@ -89,7 +105,7 @@ def add_lesson_video(request,lesson_id):
             instance = form.save(commit=False)
             instance.lesson = lesson
             instance.save()
-            return redirect('lesson_info',lesson_id)
+            return redirect('edit_lesson',lesson_id)
     context = {
         'form':form,
         'lesson':lesson,
@@ -104,7 +120,7 @@ def edit_lesson_video(request,lesson_id,pk):
         form = VideoForm(request.POST,request.FILES,instance=video)
         if form.is_valid():
             form.save()
-            return redirect('lesson_info',lesson_id)
+            return redirect('edit_lesson',lesson_id)
     context = {
         'form':form,
         'lesson':lesson,
@@ -142,7 +158,7 @@ def add_lesson_image(request,lesson_id):
             messages.success(request, "Les images a été enregistrées.")
         else: 
             messages.success(request, "aucune image ajoutée")
-        return redirect('lesson_info',lesson_id)
+        return redirect('edit_lesson',lesson_id)
 
     return render (request,'leçon/add_lesson_image.html')
 
@@ -155,7 +171,7 @@ def edit_lesson_image(request,lesson_id,pk):
         form = ImageForm(request.POST,request.FILES,instance=image)
         if form.is_valid():
             form.save()
-            return redirect('lesson_info',lesson_id)
+            return redirect('edit_lesson',lesson_id)
     context = {
     'form':form,
     'lesson':lesson,
@@ -183,7 +199,7 @@ def add_lesson_document(request,lesson_id):
             instance.save()
 
             messages.success(request, "Le document a été enregistrées.")
-            return redirect('lesson_info',lesson_id)
+            return redirect('edit_lesson',lesson_id)
     context = {
     'form':form,
     'lesson':lesson,
@@ -198,7 +214,7 @@ def edit_lesson_document(request,lesson_id,pk):
         form = DocumentForm(request.POST,request.FILES,instance=document)
         if form.is_valid():
             form.save()
-            return redirect('lesson_info',lesson_id)
+            return redirect('edit_lesson',lesson_id)
     context = {
     'form':form,
     'lesson':lesson,

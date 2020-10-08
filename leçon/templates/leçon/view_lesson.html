@@ -33,122 +33,6 @@
 		<div class="panel panel-flat">
 			<div class="panel-heading">
 				<h4 class="panel-title" style="font-weight: 500;">Leçon</h4>
-				<div class="heading-elements">
-					<ul class="icons-list">
-						<li><a href="#" data-toggle="modal" data-target="#modal_form_vertical"><i
-									class="glyphicon glyphicon-edit" style="font-size: 20px;"></i></a></li>
-						<!-- Vertical form modal -->
-						<div id="modal_form_vertical" class="modal fade">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h5 class="modal-title">
-											Modifier Leçon</h5>
-									</div>
-									<div class="panel-body">
-
-										<form method="POST" action=".">
-											{% csrf_token %}
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Level ID:</h6>
-														{{ form.level_id }}
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Subject ID:</h6>
-														{{ form.subject_id }}
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Chapiter:</h6>
-
-														{{ form.chapiter }} </div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Lesson:</h6>
-
-														{{ form.lesson }} </div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Skill:</h6>
-
-														{{ form.skill }} </div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Vacations:</h6>
-
-														{{ form.vacations }} </div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Link:</h6>
-
-														{{ form.link }} </div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Order:</h6>
-
-														{{ form.order }} </div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Remarques:</h6>
-
-														{{ form.remarques }} </div>
-												</div>
-
-												<div class="row">
-													<div class="col-md-1">
-														<div class="form-group">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<h6 class="text-muted">Visible:{{ form.state }}</h6>
-															
-														</div>
-													</div>
-												</div>
-
-
-												<div class="modal-footer">
-													<button type="button" class="btn btn-link"
-														data-dismiss="modal">Annuler</button>
-													<button type="submit" class="btn btn-primary"
-														name="LessonForm">Enregistrer</button>
-												</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /vertical form modal -->
-					</ul>
-				</div>
 			</div>
 
 			<div class="panel-body">
@@ -199,7 +83,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label style="font-weight: 500;">Lien:</label>
-							{{ lesson.link }} </div>
+							<a href="{{ lesson.link }}">visite</a> </div>
 					</div>
 
 					<div class="col-md-6">
@@ -221,12 +105,12 @@
 						<div class="form-group">
 							<label style="font-weight: 500;">Visible: </label>
 							{% if lesson.state == True %}
-						     <i class="icon-eye"></i>
+							<i class="icon-eye"></i>
 							{% else %}
-							 <i class="icon-eye-blocked"></i>
+							<i class="icon-eye-blocked"></i>
 							{% endif %}
-						
-						
+
+
 						</div>
 					</div>
 
@@ -265,19 +149,13 @@
 							<div class="tab-pane active" id="highlighted-justified-tab1">
 
 								<!-- Inside page title -->
-									<div class="breadcrumb-line breadcrumb-line-component">
-										<ul class="breadcrumb">
-											<i class="icon-video-camera3" style="font-size: 34px;"></i>
-										</ul>
-				
-										<ul style="float: right;margin: 1rem;">
-											<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="{% url 'add_lesson_video' lesson.id %}"><i
-												class="icon-add position-left"></i> Ajouter </a>
-										</ul>
-									</div>
+								<div class="breadcrumb-line breadcrumb-line-component">
+									<ul class="breadcrumb">
+										<i class="icon-video-camera3" style="font-size: 34px;"></i>
+									</ul>
+								</div>
 
-									
+
 								<div class="row">
 									<br>
 									{% for video in videos %}
@@ -291,12 +169,6 @@
 											<div class="caption">
 												<h6 class="no-margin"><a href="#"
 														class="text-default">{{video.title}}</a>
-
-													<a href="{% url 'delete_lesson_video' video.pk %}"
-														class="text-muted"><i class="icon-trash pull-right"
-															style="margin-left:1rem;"></i></a>
-													<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}"
-														class="text-muted"><i class="icon-pencil5 pull-right"></i></a>
 												</h6>
 											</div>
 
@@ -311,12 +183,6 @@
 									<ul class="breadcrumb">
 										<i class="icon-images3" style="font-size: 34px;"></i>
 									</ul>
-			
-									<ul style="float: right;margin: 1rem;">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-										href="{% url 'add_lesson_image' lesson.id %}"><i
-											class="icon-add position-left"></i> Ajouter </a>
-									</ul>
 								</div>
 								<div class="row">
 									<br>
@@ -330,13 +196,6 @@
 														<a href="{{image.image.url}}"
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"
 															data-popup="lightbox"><i class="icon-zoomin3"></i></a>
-														<a href="{% url 'edit_lesson_image' lesson.pk image.pk %}"
-															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
-																class="icon-pencil5"></i></a>
-
-														<a href="{% url 'delete_lesson_image' image.pk %}"
-															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
-																class="icon-trash"></i></a>
 													</span>
 												</div>
 											</div>
@@ -356,12 +215,6 @@
 									<ul class="breadcrumb">
 										<i class="icon-files-empty2" style="font-size: 34px;"></i>
 									</ul>
-			
-									<ul style="float: right;margin: 1rem;">
-										<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-										href="{% url 'add_lesson_document' lesson.id %}"><i
-											class="icon-add position-left"></i> Ajouter </a>
-									</ul>
 								</div>
 								<br>
 								{% for document in documents %}
@@ -372,10 +225,6 @@
 											<ul class="icons-list">
 												<li><a href="{{document.document.url}}" target="new"><i
 															class="glyphicon glyphicon-eye-open"></i></a></li>
-												<li><a href="{% url 'edit_lesson_document' lesson.pk document.pk%}"><i
-															class="glyphicon glyphicon-edit"></i></a></li>
-												<li><a href="{% url 'delete_lesson_document' document.pk %}"><i
-															class="glyphicon glyphicon-trash"></i></a></li>
 											</ul>
 										</div>
 									</div>
@@ -391,68 +240,59 @@
 									<ul class="breadcrumb">
 										<i class="icon-link2" style="font-size: 34px;"></i>
 									</ul>
-			
-									<ul style="float: right;margin: 1rem;">
-										<a data-toggle="modal" data-target="#modal_form_vertical2"
-											class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
-											href="#"><i class="icon-add position-left"></i> Ajouter </a>
-
-									</ul>
 								</div>
 
-								
-										<div id="modal_form_vertical2" class="modal fade">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close"
-															data-dismiss="modal">&times;</button>
-														<h5 class="modal-title">Add Urls</h5>
-													</div>
 
-													<form action="." method="POST">
-														{% csrf_token %}
-														<div class="modal-body">
-															<div class="form-group">
-																<div class="row">
-																	<div class="col-sm-12">
-																		<label>Titre:</label>
-																		{{form1.title}}
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<div class="row">
-																	<div class="col-sm-12">
-																		<label>Lien:</label>
-																		{{form1.link}}
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-link"
-																data-dismiss="modal">Annuler</button>
-															<button name="UrlForm" type="submit"
-																class="btn btn-primary">Enregistrer</button>
-														</div>
-													</form>
-												</div>
+								<div id="modal_form_vertical2" class="modal fade">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close"
+													data-dismiss="modal">&times;</button>
+												<h5 class="modal-title">Add Urls</h5>
 											</div>
+
+											<form action="." method="POST">
+												{% csrf_token %}
+												<div class="modal-body">
+													<div class="form-group">
+														<div class="row">
+															<div class="col-sm-12">
+																<label>Titre:</label>
+																{{form1.title}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-sm-12">
+																<label>Lien:</label>
+																{{form1.link}}
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-link"
+														data-dismiss="modal">Annuler</button>
+													<button name="UrlForm" type="submit"
+														class="btn btn-primary">Enregistrer</button>
+												</div>
+											</form>
 										</div>
-										<!-- /vertical form modal -->
-										<br>
+									</div>
+								</div>
+								<!-- /vertical form modal -->
+								<br>
 								{% for url in urls %}
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h6 class="panel-title">{{url.title}}</h6>
-										
+
 										<div class="heading-elements">
 											<ul class="icons-list">
 												<li><a href="{{ url.link }}" target="new"><i
 															class="glyphicon glyphicon-eye-open"></i></a></li>
-												<li><a href="{% url 'delete_lesson_url' url.pk%}"><i
-															class="glyphicon glyphicon-trash"></i></a></li>
 											</ul>
 										</div>
 									</div>

@@ -75,7 +75,8 @@
 
                 </div>
                 <div class="form-group">
-                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple" type="submit">Télécharger</button>
+                    <button id="save_btn" style="width: 100%;" class="btn bg-teal legitRipple"
+                        type="submit">Télécharger</button>
                     <button id="loading_btn" style="width: 100%;" class="btn btn-success d-none" type="button"
                         disabled>Téléchargement...</button>
                 </div>
@@ -114,8 +115,10 @@
             <div class="sa-fix"></div>
         </div>
         <div class="sa-icon sa-custom" style="display: none;"></div>
-        <h2>Good job!</h2>
-        <p style="display: block;">Your video uploaded successfully!</p>
+        <h2>
+            enregistré avec succès!</h2>
+        <p style="display: block;">
+            Votre vidéo a bien été enregistrée!</p>
         <fieldset>
             <input type="text" tabindex="3" placeholder="">
             <div class="sa-input-error"></div>
@@ -123,16 +126,17 @@
 
         <div class="sa-button-container">
             <div class="sa-confirm-button-container">
-                <a href="{% url 'lesson_info' lesson.id %}"><button class="confirm" tabindex="1" style="display: inline-block; background-color:
+                <a href="{% url 'edit_lesson' lesson.id %}"><button class="confirm" tabindex="1" style="display: inline-block; background-color:
                     #1F8EE7; box-shadow: 
                     #1F8EE7 0px 0px 2px
-                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Back to lesson</button></a>
+                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+                        Retour à la leçon</button></a>
             </div>
             <div class="sa-confirm-button-container">
                 <a href="{% url 'add_lesson_video' lesson.id %}"><button class="confirm" tabindex="1" style="display: inline-block; background-color:
                      rgb(102, 187, 106); box-shadow: 
                      rgba(102, 187, 106, 0.8) 0px 0px 2px
-                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Upload again</button></a>
+                     , rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">Télécharger à nouveau</button></a>
             </div>
         </div>
     </div>

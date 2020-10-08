@@ -9,7 +9,7 @@ class Lesson(models.Model):
     lesson = models.CharField(max_length=200)
     skill = models.CharField(max_length=200)
     vacations = models.IntegerField()
-    link = models.CharField(max_length=700)
+    link = models.URLField(max_length=700,null=True,blank=True)
     remarques = models.TextField(null=True,blank=True)
     order = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
