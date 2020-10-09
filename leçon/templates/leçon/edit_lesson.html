@@ -35,9 +35,9 @@
 				<h4 class="panel-title" style="font-weight: 500;">Leçon</h4>
 				<div class="heading-elements">
 					<ul class="icons-list">
-						<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open" style="font-size: 20px;"></i></a></li>	
+						<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open" style="font-size: 16px;"></i></a></li>	
 						<li><a href="#" data-toggle="modal" data-target="#modal_form_vertical"><i
-									class="glyphicon glyphicon-edit" style="font-size: 20px;"></i></a></li>
+									class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a></li>
 						
 						<!-- Vertical form modal -->
 						<div id="modal_form_vertical" class="modal fade">
@@ -52,35 +52,18 @@
 
 										<form method="POST" action=".">
 											{% csrf_token %}
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Level ID:</h6>
-														{{ form.level_id }}
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<h6 class="text-muted text-size-small">Subject ID:</h6>
-														{{ form.subject_id }}
-													</div>
-												</div>
-											</div>
 
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<h6 class="text-muted text-size-small">Chapiter:</h6>
-
 														{{ form.chapiter }}
 													</div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
-														<h6 class="text-muted text-size-small">Lesson:</h6>
-
+														<h6 class="text-muted text-size-small">Leçon:</h6>
 														{{ form.lesson }}
 													</div>
 												</div>
@@ -89,7 +72,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<h6 class="text-muted text-size-small">Skill:</h6>
+														<h6 class="text-muted text-size-small">Compétence:</h6>
 
 														{{ form.skill }}
 													</div>
@@ -107,7 +90,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<h6 class="text-muted text-size-small">Link:</h6>
+														<h6 class="text-muted text-size-small">Lien:</h6>
 
 														{{ form.link }}
 													</div>
@@ -115,7 +98,7 @@
 
 												<div class="col-md-6">
 													<div class="form-group">
-														<h6 class="text-muted text-size-small">Order:</h6>
+														<h6 class="text-muted text-size-small">Arrangement:</h6>
 
 														{{ form.order }}
 													</div>
@@ -164,15 +147,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Level id:</label>
-							{{ lesson.level_id }}
-						</div>
+							<label style="font-weight: 500;">Niveau:</label>
+							{{ lesson.level.name }} </div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="form-group">
-							<label style="font-weight: 500;">Subject id:</label>
-							{{ lesson.subject_id }} </div>
+							<label style="font-weight: 500;">Matiére:</label>
+							{{ lesson.subject.name }} </div>
 					</div>
 				</div>
 

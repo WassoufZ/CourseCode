@@ -4,13 +4,13 @@ from . import views
 
 urlpatterns = [
     
-    url(r'^view_lessons_list/$', views.view_lessons_list, name="view_lessons_list"),  
+    url(r'^view_lessons_list/(\d+)/$', views.view_lessons_list, name="view_lessons_list"),  
     url(r'^add_lesson/$', views.add_lesson, name="add_lesson"),
     url(r'^delete_lesson/(\d+)/$', views.delete_lesson, name="delete_lesson"),  
     url(r'^edit_lesson/(\d+)/$', views.edit_lesson, name="edit_lesson"),
     url(r'^view_lesson/(\d+)/$', views.view_lesson, name="view_lesson"),
 
-    url(r'^view_lessons_videos/$', views.view_lessons_videos, name="view_lessons_videos"),
+    url(r'^view_lessons_videos/$', views.VideosView.as_view(), name="view_lessons_videos"),
     url(r'^search/$', views.SearchView.as_view(), name="search"),  
 
     url(r'^edit_lesson/(\d+)/add_lesson_video/$', views.add_lesson_video, name="add_lesson_video"),

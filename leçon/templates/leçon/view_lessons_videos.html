@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block content_area %}
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h4 class="panel-title"> {% trans "vidéos" %} </h4>
                 <div class="heading-elements">
-                    <i class="icon-video-camera3" style="font-size: 34px;"></i>
-                </div>
+		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
+		        		href="javascript:history.go(-1)" 
+		            ><i class="icon-arrow-left52 position-left"></i> {% trans "Retour" %}   </a>	        	
+		    	</div>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="tab-pane active" id="highlighted-justified-tab1">
         <div class="row">
             <br>
-            {% for video in videos %}
+            {% for video in object_list %}
             <div class="col-lg-4 col-sm-6">
                 <div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
                     <div class="video-container">

@@ -6,36 +6,35 @@
 <li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
 <li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
 <li class="active">{% trans "Leçon" %} </li>
-{% endblock %} 
+{% endblock %}
 
 {% block content_area %}
 
 
 <div class="row">
-	<div class="col-md-12">		
+	<div class="col-md-12">
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h4 class="panel-title"> {% trans "leçons" %}  </h4>
+				<h4 class="panel-title"> {% trans "leçons" %} : <a href="{% url 'view_lessons_videos' %}"><i class="icon-file-video"></i></a></h4>
 
 				<div class="heading-elements">
-					
-				<div class="col-md-8">
-					<form action="{% url 'search' %}" method="GET">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Recherche" name="q" required>
-							<span class="input-group-btn">
-								<button class="btn btn-default legitRipple" type="submit"><i class="icon-search4"></i></button>
-							</span>
-						</div>
-					</form>
+					<div class="col-md-8">
+						<form action="{% url 'search' %}" method="GET">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Recherche" name="q" required>
+								<span class="input-group-btn">
+									<button class="btn btn-default legitRipple" type="submit"><i
+											class="icon-search4"></i></button>
+								</span>
+							</div>
+						</form>
+					</div>
+
+
+					<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" href="{% url 'add_lesson'%}"><i
+							class="icon-add position-left"></i> {% trans "Ajouter" %} </a>
 				</div>
-
-
-		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
-		        		href="{% url 'add_lesson'%}" 
-		            ><i class="icon-add position-left"></i> {% trans "Ajouter" %}   </a>	        	
-		    	</div>
-			</div>				
+			</div>
 		</div>
 	</div>
 </div>
@@ -47,13 +46,13 @@
 		<h6 class="panel-title">{{lesson.chapiter}}</h6>
 		<div class="heading-elements">
 			<ul class="icons-list">
-				<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open"></i></a></li>	
+				<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open"></i></a></li>
 				<li><a href="{% url 'edit_lesson' lesson.pk %}"><i class="glyphicon glyphicon-edit"></i></a></li>
 				<li><a href="{% url 'delete_lesson' lesson.pk %}"><i class="glyphicon glyphicon-trash"></i></a></li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="panel-body">
 		{{lesson.created}}
 	</div>

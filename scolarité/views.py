@@ -99,6 +99,9 @@ def subjectsList(request):
 #--------- END Level Views ----------------------------------------------
 
 def readLevelSubjectList(request,level_id):
+
+    request.session['level_id'] = level_id# passing the level  id to leçon
+
     if not request.user.is_authenticated:
         return redirectLogin(request)
     if not request.user.user_type == 'school_admin':
@@ -117,3 +120,4 @@ def readLevelSubjectList(request,level_id):
         messages.warning(request, _('Le niveau n\'existe pas.'))
         return  redirect('scolarité_home')
     return render(request, 'scolarité/subjects_list.html',locals())
+

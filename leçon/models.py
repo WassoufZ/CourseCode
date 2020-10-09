@@ -1,10 +1,12 @@
 from django.db import models
 from .validators import *
 
+from scolarité.models.level import Level
+from scolarité.models.subject import Subject
 
 class Lesson(models.Model):
-    level_id = models.CharField(max_length=200)
-    subject_id = models.CharField(max_length=200)
+    level = models.ForeignKey(Level,on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     chapiter = models.CharField(max_length=200)
     lesson = models.CharField(max_length=200)
     skill = models.CharField(max_length=200)
@@ -17,7 +19,7 @@ class Lesson(models.Model):
     state = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.level_id
+        return self.lesson
 
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)

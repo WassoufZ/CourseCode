@@ -6,11 +6,10 @@ class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
         fields = '__all__'
+        exclude = ['subject','level']
 
     def __init__(self, *args, **kwargs):
         super(LessonForm, self).__init__(*args, **kwargs)
-        self.fields['level_id'].widget.attrs={'class':'form-control','placeholder': 'Level id'}
-        self.fields['subject_id'].widget.attrs={'class':'form-control','placeholder': 'Subject id'}
         self.fields['chapiter'].widget.attrs={'class':'form-control','placeholder': 'Chapiter'}
         self.fields['lesson'].widget.attrs={'class':'form-control','placeholder': 'Lesson'}
         self.fields['skill'].widget.attrs={'class':'form-control','placeholder': 'Skill'}
