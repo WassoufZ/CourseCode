@@ -4,14 +4,11 @@ from django.views.generic import ListView
 from django.db.models import Q
 from .forms import *
 from .models import *
-
 from scolarité.models.level import Level
 from scolarité.models.subject import Subject
-
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
 
 
