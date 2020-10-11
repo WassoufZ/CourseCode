@@ -57,4 +57,22 @@ class   UrlForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UrlForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs={'class':'form-control','placeholder': 'title'}
-        self.fields['link'].widget.attrs={'class':'form-control','placeholder': 'Url'}        
+        self.fields['link'].widget.attrs={'class':'form-control','placeholder': 'Url'} 
+
+
+class GlobalForm(forms.ModelForm):
+    class Meta:
+        model = Lesson
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
+
+        if 'level' in self.data:
+            try:
+                level_id = int(self.data.get('level'))
+                self.fields['subject'].queryset = Subject.objects.filter(level_id=level_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty subject queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.level.subject_set.order_by('name')

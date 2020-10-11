@@ -4,8 +4,12 @@ from django.db.models import CharField, Model
 
 from client.models import School,Schoolyear
 
+from .level import Level
+
 
 class Subject(models.Model):
+    level = models.ForeignKey(Level,null=True,on_delete=models.CASCADE)
+
     name = models.CharField(max_length=100,verbose_name="Nom de la matière")
     name_arabic = models.CharField(max_length=100,verbose_name="Nom de la matière (Arabe)", blank=False)
     code = models.CharField(max_length=100,verbose_name="Code ")

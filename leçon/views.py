@@ -301,3 +301,23 @@ def delete_lesson_url(request,pk):
 
 
 
+
+#========================== global form=====================================
+def globalform(request):
+    form = GlobalForm()
+    if request.method == 'POST':
+        form = GlobalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('globalform')
+    return render(request, 'leçon/globalform.html', {'form': form})
+
+
+
+# AJAX
+def load_subjects(request):
+    level_id = request.GET.get('level_id')
+    subjects = Subject.objects.filter(level_id=level_id).all()
+    #return render(request, 'leçon/subject_dropdown_list_options.html', {'subjects': subjects})
+    print(list(subjects.values('id', 'name')), safe=False)
+    return JsonResponse(list(subjects.values('id', 'name')), safe=False)

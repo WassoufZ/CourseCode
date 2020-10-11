@@ -30,5 +30,8 @@ urlpatterns = [
 
     url(r'^delete_lesson_url/(\d+)/$', views.delete_lesson_url, name="delete_lesson_url"),
 
+    url(r'^globalform/', views.globalform, name='globalform'),
+    
+    url(r'^ajax/load-subjects/', views.load_subjects, name='ajax_load_subjects'), # AJAX
  
 ]
