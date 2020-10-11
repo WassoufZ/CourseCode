@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'client',
     'scolarité',
     'users',
-    'leçon',
+    'lesson',
     'crispy_forms',
 ]
 

@@ -35,7 +35,7 @@ urlpatterns = [
     
     url(r'^client/', include('client.urls')),
     url(r'^school/', include('scolarité.urls')),
-    url(r'^leçon/', include('leçon.urls')),
+    url(r'^lesson/', include('lesson.urls')),
     url(r'^accounts/', include('users.urls')),
     url(r'^login', views.loginUser,name="login"),
     url(r'^logout', views.logoutUser,name="logout"),
