@@ -36,6 +36,28 @@ class VideosView(ListView):
         object_list = Video.objects.filter(lesson__in=lessons)      #filtering the videos that has the same lasson object
         return object_list
 
+class ImagesView(ListView):
+    model = Image
+    template_name = 'leçon/view_lessons_images.html'
+    def get_queryset(self):
+        level = Level.objects.get(id=self.request.session['level_id'])
+        subject = Subject.objects.get(id=self.request.session['subject_id'])
+        lessons = Lesson.objects.filter(subject=subject ,level=level)
+
+        object_list = Image.objects.filter(lesson__in=lessons)      
+        return object_list
+
+class DocumentsView(ListView):
+    model = Document
+    template_name = 'leçon/view_lessons_documents.html'
+    def get_queryset(self):
+        level = Level.objects.get(id=self.request.session['level_id'])
+        subject = Subject.objects.get(id=self.request.session['subject_id'])
+        lessons = Lesson.objects.filter(subject=subject ,level=level)
+
+        object_list = Document.objects.filter(lesson__in=lessons)      
+        return object_list
+
 
 class SearchView(ListView):
     model = Lesson
@@ -79,6 +101,7 @@ def add_lesson(request):
             instance.level = level
             instance.subject = subject
             instance.save()
+            messages.success(request, "leçon a été créée avec succès, ajoutez les fichiers multimédias de votre leçon maintenant.")
             return HttpResponseRedirect(reverse(edit_lesson, args=[instance.id] ))#redirecting to the edit lesson page 
     context = {
         'form':form,
@@ -128,6 +151,7 @@ def edit_lesson(request,pk):
 def delete_lesson(request,pk):
     lesson = Lesson.objects.get(pk=pk)
     lesson.delete()
+    messages.warning(request, "une Leçon a été supprimée avec succès!")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 #==============================lesson videos section=================
@@ -167,6 +191,7 @@ def edit_lesson_video(request,lesson_id,pk):
 def delete_lesson_video(request,pk):
     video = Video.objects.get(pk=pk)
     video.delete()
+    messages.warning(request, "une vidéo a été supprimée avec succès!")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -219,6 +244,7 @@ def edit_lesson_image(request,lesson_id,pk):
 def delete_lesson_image(request,pk):
     image = Image.objects.get(pk=pk)
     image.delete()
+    messages.warning(request, "un image a été supprimée avec succès!")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -261,6 +287,7 @@ def edit_lesson_document(request,lesson_id,pk):
 def delete_lesson_document(request,pk):
     document = Document.objects.get(pk=pk)
     document.delete()
+    messages.warning(request, "une document a été supprimée avec succès!")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -269,6 +296,7 @@ def delete_lesson_document(request,pk):
 def delete_lesson_url(request,pk):
     url = Url.objects.get(pk=pk)
     url.delete()
+    messages.warning(request, "une Url a été supprimée avec succès!")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 

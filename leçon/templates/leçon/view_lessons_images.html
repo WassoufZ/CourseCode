@@ -1,0 +1,52 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% block title %} Leçon {% endblock %}
+
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+<li class="active">{% trans "Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title"> {% trans "images" %} : <a href="javascript:history.go(-1)"><i class="icon-list2"></i></a></h4>
+                <div class="heading-elements">
+		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
+		        		href="javascript:history.go(-1)" 
+		            ><i class="icon-arrow-left52 position-left"></i> {% trans "Retour" %}   </a>	        	
+		    	</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% for image in object_list %}
+<div class="row">
+
+<div class="col-md-4">
+    <div class="thumbnail" style="box-shadow:1px 1px 6px gray;height: 23rem;">
+        <div class="thumb">
+            <img src="{{image.image.url}}" alt="" style="height: 15rem;">
+            <div class="caption-overflow">
+                <span>
+                    <a href="{{image.image.url}}"
+                        class="btn btn-flat border-white text-white btn-rounded btn-icon"
+                        data-popup="lightbox"><i class="icon-zoomin3"></i></a>
+                    <a href="{% url 'view_lesson' image.lesson.pk %}"
+                        class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
+                            class="icon-eye"></i></a>
+                </span>
+            </div>
+        </div>
+        <div class="caption">
+            <p>{{image.title}}</p>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+
+{% endblock content_area %}

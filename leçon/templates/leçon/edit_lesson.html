@@ -9,10 +9,13 @@
 {% endblock %}
 
 {% block content_area %}
+<link href="{% static 'css/leçon.css' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 {% if messages %} {% for message in messages %}
-<div class="tab-pane" id="messages">
-	<div class="alert alert-{{ message.tags }}" role="alert">
-		<button type="button" class="close" data-dismiss="alert">×</button>
+<div id="messages">
+	<div class="alert bg-{{ message.tags }} alert-styled-left" role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
 		<div class="alert-icon">
 			<i class="icon-info"></i>
 		</div>
@@ -35,10 +38,11 @@
 				<h4 class="panel-title" style="font-weight: 500;">Leçon</h4>
 				<div class="heading-elements">
 					<ul class="icons-list">
-						<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open" style="font-size: 16px;"></i></a></li>	
+						<li><a href="{% url 'view_lesson' lesson.pk %}"><i class="glyphicon glyphicon-eye-open"
+									style="font-size: 16px;"></i></a></li>
 						<li><a href="#" data-toggle="modal" data-target="#modal_form_vertical"><i
 									class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a></li>
-						
+
 						<!-- Vertical form modal -->
 						<div id="modal_form_vertical" class="modal fade">
 							<div class="modal-dialog">
@@ -283,9 +287,39 @@
 												<h6 class="no-margin"><a href="#"
 														class="text-default">{{video.title}}</a>
 
-													<a href="{% url 'delete_lesson_video' video.pk %}"
+													<a href="#myModal" data-toggle="modal" 
 														class="text-muted"><i class="icon-trash pull-right"
 															style="margin-left:1rem;"></i></a>
+													<!-- Modal HTML -->
+													<div id="myModal" class="modal fade">
+														<div class="modal-dialog modal-confirm">
+															<div class="modal-content">
+																<div class="modal-header flex-column">
+																	<div class="icon-box2">
+																		<i class="material-icons">&#xE5CD;</i>
+																	</div>
+																	<h4 class="modal-title w-100">
+																		Voulez-vous vraiment le supprimer?</h4>
+																	<button type="button" class="close"
+																		data-dismiss="modal"
+																		aria-hidden="true">&times;</button>
+																</div>
+																<div class="modal-body">
+																	<p>
+																		cette video seront supprimés
+																		définitivement</p>
+																</div>
+																<div class="modal-footer justify-content-center">
+																	<button type="button" class="btn btn-secondary"
+																		data-dismiss="modal">Annuler</button>
+																	<a href="{% url 'delete_lesson_video' video.pk %}"><button
+																			type="button"
+																			class="btn btn-danger">Supprimer</button></a>
+																</div>
+															</div>
+														</div>
+													</div>
+
 													<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}"
 														class="text-muted"><i class="icon-pencil5 pull-right"></i></a>
 												</h6>
@@ -325,9 +359,9 @@
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
 																class="icon-pencil5"></i></a>
 
-														<a href="{% url 'delete_lesson_image' image.pk %}"
+														<a a href="#myModal2" data-toggle="modal" 
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
-																class="icon-trash"></i></a>
+																class="icon-trash"></i></a>  
 													</span>
 												</div>
 											</div>
@@ -337,9 +371,39 @@
 											</div>
 										</div>
 									</div>
+
+									<div id="myModal2" class="modal fade">
+										<div class="modal-dialog modal-confirm">
+											<div class="modal-content">
+												<div class="modal-header flex-column">
+													<div class="icon-box2">
+														<i class="material-icons">&#xE5CD;</i>
+													</div>
+													<h4 class="modal-title w-100">
+														Voulez-vous vraiment le supprimer?</h4>
+													<button type="button" class="close"
+														data-dismiss="modal"
+														aria-hidden="true">&times;</button>
+												</div>
+												<div class="modal-body">
+													<p>
+														cette image seront supprimés
+														définitivement</p>
+												</div>
+												<div class="modal-footer justify-content-center">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Annuler</button>
+													<a href="{% url 'delete_lesson_image' image.pk %}"><button
+															type="button"
+															class="btn btn-danger">Supprimer</button></a>
+												</div>
+											</div>
+										</div>
+									</div>
 									{% endfor %}
 								</div>
 							</div>
+							
 
 							<div class="tab-pane" id="highlighted-justified-tab3">
 								<!-- Inside page title -->
@@ -365,9 +429,40 @@
 															class="glyphicon glyphicon-eye-open"></i></a></li>
 												<li><a href="{% url 'edit_lesson_document' lesson.pk document.pk%}"><i
 															class="glyphicon glyphicon-edit"></i></a></li>
-												<li><a href="{% url 'delete_lesson_document' document.pk %}"><i
+												<li><a href="#myModal3" data-toggle="modal"><i
 															class="glyphicon glyphicon-trash"></i></a></li>
+													
 											</ul>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="myModal3" class="modal fade">
+									<div class="modal-dialog modal-confirm">
+										<div class="modal-content">
+											<div class="modal-header flex-column">
+												<div class="icon-box2">
+													<i class="material-icons">&#xE5CD;</i>
+												</div>
+												<h4 class="modal-title w-100">
+													Voulez-vous vraiment le supprimer?</h4>
+												<button type="button" class="close"
+													data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+											</div>
+											<div class="modal-body">
+												<p>
+													cette document seront supprimés
+													définitivement</p>
+											</div>
+											<div class="modal-footer justify-content-center">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Annuler</button>
+												<a href="{% url 'delete_lesson_document' document.pk %}"><button
+														type="button"
+														class="btn btn-danger">Supprimer</button></a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -398,7 +493,7 @@
 											<div class="modal-header">
 												<button type="button" class="close"
 													data-dismiss="modal">&times;</button>
-												<h5 class="modal-title">Add Urls</h5>
+												<h5 class="modal-title">Ajouter Urls</h5>
 											</div>
 
 											<form action="." method="POST">
@@ -442,9 +537,38 @@
 											<ul class="icons-list">
 												<li><a href="{{ url.link }}" target="new"><i
 															class="glyphicon glyphicon-eye-open"></i></a></li>
-												<li><a href="{% url 'delete_lesson_url' url.pk%}"><i
+												<li><a  href="#myModal4" data-toggle="modal" ><i
 															class="glyphicon glyphicon-trash"></i></a></li>
 											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div id="myModal4" class="modal fade">
+									<div class="modal-dialog modal-confirm">
+										<div class="modal-content">
+											<div class="modal-header flex-column">
+												<div class="icon-box2">
+													<i class="material-icons">&#xE5CD;</i>
+												</div>
+												<h4 class="modal-title w-100">
+													Voulez-vous vraiment le supprimer?</h4>
+												<button type="button" class="close"
+													data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+											</div>
+											<div class="modal-body">
+												<p>
+													cette Url seront supprimés
+													définitivement</p>
+											</div>
+											<div class="modal-footer justify-content-center">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Annuler</button>
+												<a href="{% url 'delete_lesson_url' url.pk%}"><button
+														type="button"
+														class="btn btn-danger">Supprimer</button></a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -467,5 +591,6 @@
 
 </div>
 </div>
-<!-- /grid -->
+
+
 {% endblock content_area %}

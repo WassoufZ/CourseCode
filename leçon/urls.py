@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^view_lesson/(\d+)/$', views.view_lesson, name="view_lesson"),
 
     url(r'^view_lessons_videos/$', views.VideosView.as_view(), name="view_lessons_videos"),
+    url(r'^view_lessons_images/$', views.ImagesView.as_view(), name="view_lessons_images"),
+    url(r'^view_lessons_documents/$', views.DocumentsView.as_view(), name="view_lessons_documents"),
+
     url(r'^search/$', views.SearchView.as_view(), name="search"),  
 
     url(r'^edit_lesson/(\d+)/add_lesson_video/$', views.add_lesson_video, name="add_lesson_video"),
