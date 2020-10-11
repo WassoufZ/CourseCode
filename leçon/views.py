@@ -302,7 +302,9 @@ def delete_lesson_url(request,pk):
 
 
 
-#========================== global form=====================================
+#========================== global form stuff=====================================
+from django.http import JsonResponse
+
 def globalform(request):
     form = GlobalForm()
     if request.method == 'POST':
@@ -311,8 +313,6 @@ def globalform(request):
             form.save()
             return redirect('globalform')
     return render(request, 'leçon/globalform.html', {'form': form})
-
-
 
 # AJAX
 def load_subjects(request):
