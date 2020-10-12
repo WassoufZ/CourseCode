@@ -55,7 +55,7 @@ class Url(models.Model):
     def __str__(self):
         return self.title
 
-
+#======= the model that uses subjectlevel insted of subject=================
 class GlobalLesson(models.Model):
     level = models.ForeignKey(Level,on_delete=models.CASCADE)
     subject = models.ForeignKey(LevelSubject,on_delete=models.CASCADE)

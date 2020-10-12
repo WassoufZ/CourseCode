@@ -62,17 +62,17 @@ class   UrlForm(forms.ModelForm):
 
 class GlobalLessonForm(forms.ModelForm):
     class Meta:
-        model = GlobalLesson
+        model = Lesson
         fields = '__all__'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['subject'].queryset = LevelSubject.objects.none()
+        self.fields['subject'].queryset = Subject.objects.none() #change to .all() to see list of all subjects
 
         if 'level' in self.data:
             try:
                 level_id = int(self.data.get('level'))
-                self.fields['subject'].queryset = LevelSubject.objects.filter(level_id=level_id)
+                self.fields['subject'].queryset = Subject.objects.filter(level_id=level_id)
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
-            self.fields['subject'].queryset = self.instance.level.levelsubject_set
+            self.fields['subject'].queryset = self.instance.level.subject_set

@@ -10,7 +10,7 @@
 <body>
 <h2>global Form</h2>
 
-<form method="post" id="globallessonform" data-subjects-url="{% url 'ajax_load_levelsubjects' %}" novalidate>
+<form method="post" id="globallessonform" data-subjects-url="{% url 'ajax_load_subjects' %}" novalidate>
     {% csrf_token %}
     <table>
       {{ form.as_table}}

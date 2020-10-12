@@ -311,8 +311,8 @@ class GlobalLessonView(CreateView):
     form_class = GlobalLessonForm
     success_url = reverse_lazy('globalform')
 
-def load_levelsubjects(request):
+def load_subjects(request):
     level_id = request.GET.get('level')
-    subjects = LevelSubject.objects.filter(level_id=level_id).order_by('date')
+    subjects = Subject.objects.filter(level_id=level_id).order_by('date')
     return render(request, 'lesson/subject_dropdown_list_options.html', {'subjects': subjects})
 

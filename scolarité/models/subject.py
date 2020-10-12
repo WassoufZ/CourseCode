@@ -18,7 +18,7 @@ class Subject(models.Model):
     school = models.ForeignKey(School, related_name='subjects',on_delete=models.CASCADE)
 
     schoolyear = models.ForeignKey(Schoolyear,null=True,on_delete=models.CASCADE)
-    #level = models.ForeignKey(Level)
+    level = models.ForeignKey(Level,on_delete=models.CASCADE)# this is adedd  to work with the globalform using subject 
     def __str__(self):
       
         return self.name
