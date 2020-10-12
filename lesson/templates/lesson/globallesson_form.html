@@ -10,27 +10,26 @@
 <body>
 <h2>global Form</h2>
 
-<form method="post" id="globallessonform" data-levelsubjects-url="{% url 'ajax_load_levelsubjects' %}" novalidate>
+<form method="post" id="globallessonform" data-subjects-url="{% url 'ajax_load_levelsubjects' %}" novalidate>
     {% csrf_token %}
     <table>
-      {{ form.as_p}}
+      {{ form.as_table}}
     </table>
     <button type="submit">Save</button>
   </form>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
     $("#id_level").change(function () {
-      var url = $("#globallessonform").attr("data-levelsubjects-url");  // get the url of the `load` view
+      var url = $("#globallessonform").attr("data-subjects-url");  // get the url of the `load` view
       var levelId = $(this).val();  // get the selected level ID from the HTML input
 
       $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        url: url,                    // set the url of the request/)
         data: {
           'level': levelId
         },
         success: function (data) {   // `data` is the return of the `load` view function
-          $("#id_levelsubject").html(data);
-          console.log(data)  // replace the contents of the levelsubject input with the data that came from the server
+          $("#id_subject").html(data);  // replace the contents of the levelsubject input with the data that came from the server
         }
       });
 

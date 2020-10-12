@@ -313,5 +313,6 @@ class GlobalLessonView(CreateView):
 
 def load_levelsubjects(request):
     level_id = request.GET.get('level')
-    levelsubjects = LevelSubject.objects.filter(level_id=level_id).order_by('date')
-    return render(request, 'lesson/subject_dropdown_list_options.html', {'levelsubjects': levelsubjects})
+    subjects = LevelSubject.objects.filter(level_id=level_id).order_by('date')
+    return render(request, 'lesson/subject_dropdown_list_options.html', {'subjects': subjects})
+

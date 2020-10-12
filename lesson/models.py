@@ -58,7 +58,7 @@ class Url(models.Model):
 
 class GlobalLesson(models.Model):
     level = models.ForeignKey(Level,on_delete=models.CASCADE)
-    levelsubject = models.ForeignKey(LevelSubject,on_delete=models.CASCADE)
+    subject = models.ForeignKey(LevelSubject,on_delete=models.CASCADE)
     chapiter = models.CharField(max_length=200)
     lesson = models.CharField(max_length=200)
     skill = models.CharField(max_length=200)

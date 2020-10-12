@@ -66,13 +66,13 @@ class GlobalLessonForm(forms.ModelForm):
         fields = '__all__'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['levelsubject'].queryset = LevelSubject.objects.none()
+        self.fields['subject'].queryset = LevelSubject.objects.none()
 
         if 'level' in self.data:
             try:
                 level_id = int(self.data.get('level'))
-                self.fields['levelsubject'].queryset = LevelSubject.objects.filter(level_id=level_id)
+                self.fields['subject'].queryset = LevelSubject.objects.filter(level_id=level_id)
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
-            self.fields['levelsubject'].queryset = self.instance.level.levelsubject_set
+            self.fields['subject'].queryset = self.instance.level.levelsubject_set
