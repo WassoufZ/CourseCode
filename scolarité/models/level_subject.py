@@ -21,4 +21,4 @@ class LevelSubject(models.Model):
         nous permettra de reconnaître facilement les différents objets que
         nous traiterons plus tard et dans l'administration
         """
-        return self.subject
+        return self.subject.name
