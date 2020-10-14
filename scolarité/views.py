@@ -28,6 +28,8 @@ import arabic_reshaper
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from lesson.models import Lesson
+from django.db.models import Count,Q
 
 
 db_name = settings.DATABASES['default']['NAME']
@@ -59,8 +61,7 @@ def levelsList(request):
     try:
         school_id = request.session['school_id']
         school = School.objects.get(id=school_id)   
-        levels_list = Level.objects.filter(school__id= school_id)   
-
+        levels_list = Level.objects.filter(school__id= school_id).annotate(number_of_subjects=Count('levelsubject'))
     # if the object doesn't exist 
     except School.DoesNotExist:
         messages.warning(request, 'L\'école n\'existe pas')
@@ -97,6 +98,7 @@ def subjectsList(request):
     return render(request, 'scolarité/subjects_list.html',locals())
 
 #--------- END Level Views ----------------------------------------------
+from django.db import models
 
 def readLevelSubjectList(request,level_id):
 
@@ -107,12 +109,13 @@ def readLevelSubjectList(request,level_id):
     if not request.user.user_type == 'school_admin':
         return redirectHomePermissionDenied(request) 
     try:
-        level = Level.objects.get(id=level_id) 
+        level = Level.objects.get(id=level_id)
         school_id = request.session['school_id']
         school = School.objects.get(id=school_id)    
         if level.school.id == school_id:
             """ la liste des matières pour chaque level"""
-            subjects_list = Subject.objects.extra(where=[db_name+'.scolarité_subject.id in( select subject_id from '+db_name+'.scolarité_levelsubject where level_id='+level_id+')'])             
+            subjects_list = Subject.objects.extra(where=[db_name+'.scolarité_subject.id in( select subject_id from '+db_name+'.scolarité_levelsubject where level_id='+level_id+')'])                        
+            subjects_list = subjects_list.annotate(number_of_lessons=models.Sum(models.Case(models.When(lesson__level=level,then=1),default=0,output_field=models.IntegerField(),)))
         else:
             return  redirect('scolarité_home')
     # if the object doesn't exist

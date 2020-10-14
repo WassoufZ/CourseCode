@@ -67,9 +67,14 @@
 
 				<div class="row">
 					<div class="col-md-6">
+						{% if lesson.link %}
 						<div class="form-group">
 							<label style="font-weight: 500;">Lien:</label>
 							<a href="{{ lesson.link }}">visite</a> </div>
+							{% else %}
+							<label style="font-weight: 500;">Lien:</label>
+							aucun lien
+							{%endif%}
 					</div>
 
 					<div class="col-md-6">

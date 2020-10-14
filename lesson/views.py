@@ -78,6 +78,12 @@ def view_lesson(request,pk):
     images = Image.objects.filter(lesson=lesson)
     documents = Document.objects.filter(lesson=lesson)
     urls = Url.objects.filter(lesson=lesson)
+    #add this if statment to count views only from students
+    '''if request.user.user_type == 'school_admin':
+        pass
+    else:'''
+    lesson.views = lesson.views + 1
+    lesson.save()
     context={
         'lesson':lesson,
         'videos':videos,
@@ -305,14 +311,21 @@ def delete_lesson_url(request,pk):
 #========================== global form stuff=====================================
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
+from client.models import School
 
 class GlobalLessonView(CreateView):
-    model = GlobalLesson
+    model = Lesson
     form_class = GlobalLessonForm
     success_url = reverse_lazy('globalform')
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(request=self.request)
+        return kwargs
 
 def load_subjects(request):
     level_id = request.GET.get('level')
-    subjects = Subject.objects.filter(level_id=level_id).order_by('date')
+    subjects = Subject.objects.extra(where=
+    [db_name+'.scolarité_subject.id in( select subject_id from '+db_name
+    +'.scolarité_levelsubject where level_id='+level_id+')'])
     return render(request, 'lesson/subject_dropdown_list_options.html', {'subjects': subjects})
 
