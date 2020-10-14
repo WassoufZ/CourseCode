@@ -317,15 +317,14 @@ class GlobalLessonView(CreateView):
     model = Lesson
     form_class = GlobalLessonForm
     success_url = reverse_lazy('globalform')
-    def get_form_kwargs(self):
+    
+    def get_form_kwargs(self):#this is for passing (request) to form
         kwargs = super().get_form_kwargs()
         kwargs.update(request=self.request)
         return kwargs
 
 def load_subjects(request):
     level_id = request.GET.get('level')
-    subjects = Subject.objects.extra(where=
-    [db_name+'.scolarité_subject.id in( select subject_id from '+db_name
-    +'.scolarité_levelsubject where level_id='+level_id+')'])
+    subjects = Subject.objects.extra(where=[db_name+'.scolarité_subject.id in( select subject_id from '+db_name+'.scolarité_levelsubject where level_id='+level_id+')'])
     return render(request, 'lesson/subject_dropdown_list_options.html', {'subjects': subjects})
 

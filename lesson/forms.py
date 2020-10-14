@@ -6,7 +6,7 @@ class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
         fields = '__all__'
-        exclude = ['subject','level']
+        exclude = ['subject','level','views']
 
     def __init__(self, *args, **kwargs):
         super(LessonForm, self).__init__(*args, **kwargs)
@@ -68,15 +68,12 @@ class GlobalLessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
         fields = '__all__'
+        #exclude = ['views'] #if you want to control the views count remove the '#'
+
     def __init__(self, request, *args, **kwargs):
         school_id = request.session['school_id']
         super().__init__(*args, **kwargs)
-        self.fields['subject'].queryset = Subject.objects.none() #change to .all() to see list of all subjects
+        #self.fields['subject'].queryset = Subject.objects.none() #change to .all() to see list of all subjects
         self.fields['level'].queryset = Level.objects.filter(school__id= school_id)
 
-        if 'level' in self.data:
-            try:
-                level_id = int(self.data.get('level'))
-                self.fields['subject'].queryset = Subject.objects.extra(where=[db_name+'.scolarité_subject.id in( select subject_id from '+db_name+'.scolarité_levelsubject where level_id='+level_id+')'])
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
+       
