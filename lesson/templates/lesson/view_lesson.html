@@ -71,10 +71,10 @@
 						<div class="form-group">
 							<label style="font-weight: 500;">Lien:</label>
 							<a href="{{ lesson.link }}">visite</a> </div>
-							{% else %}
-							<label style="font-weight: 500;">Lien:</label>
-							aucun lien
-							{%endif%}
+						{% else %}
+						<label style="font-weight: 500;">Lien:</label>
+						aucun lien
+						{%endif%}
 					</div>
 
 					<div class="col-md-6">
@@ -151,10 +151,19 @@
 									{% for video in videos %}
 									<div class="col-lg-6 col-sm-6">
 										<div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
-											<div class="video-container">
-												<video controls play style="width:100%;">
-													<source src="{{video.video.url}}">
-												</video>
+											<div class="thumb">
+												<div class="video-container">
+													<video style="width:100%;">
+														<source src="{{video.video.url}}">
+													</video>
+												</div>
+												<div class="caption-overflow">
+													<span>
+														<a href="{% url 'view_video' video.pk %}"
+															class="counterI btn btn-flat border-white text-white btn-rounded btn-icon"
+															data-popup="lightbox"><i class="icon-play4"></i></a>
+													</span>
+												</div>
 											</div>
 											<div class="caption">
 												<h6 class="no-margin"><a href="#"
@@ -183,8 +192,8 @@
 												<img src="{{image.image.url}}" alt="" style="height: 15rem;">
 												<div class="caption-overflow">
 													<span>
-														<a href="{{image.image.url}}"
-															class="btn btn-flat border-white text-white btn-rounded btn-icon"
+														<a id="button-{{ image.pk}}" href="{{image.image.url}}"
+															class="counterI btn btn-flat border-white text-white btn-rounded btn-icon"
 															data-popup="lightbox"><i class="icon-zoomin3"></i></a>
 													</span>
 												</div>
@@ -195,6 +204,17 @@
 											</div>
 										</div>
 									</div>
+									<script>
+										$(".counterI").click(function () {
+											var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+											$.ajax({
+												url: "{% url 'ajax_image_views' image.pk %}",
+												data: {
+													'pk': $(this).attr('id')
+												},
+											});
+										});
+									</script>
 									{% endfor %}
 								</div>
 							</div>
@@ -213,13 +233,24 @@
 										<h6 class="panel-title">{{document.title}}</h6>
 										<div class="heading-elements">
 											<ul class="icons-list">
-												<li><a href="{{document.document.url}}" target="new"><i
-															class="glyphicon glyphicon-eye-open"></i></a></li>
+												<li><a class="counterD" id="button-{{ document.pk}}"
+														href="{{document.document.url}}" target="new"><i
+															class="icon-download4"></i></a></li>
 											</ul>
 										</div>
 									</div>
 								</div>
-
+								<script>
+									$(".counterD").click(function () {
+										var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+										$.ajax({
+											url: "{% url 'ajax_document_views' document.pk %}",
+											data: {
+												'pk': $(this).attr('id')
+											},
+										});
+									});
+								</script>
 								{% endfor %}
 							</div>
 
@@ -281,20 +312,25 @@
 
 										<div class="heading-elements">
 											<ul class="icons-list">
-												<li><a href="{{ url.link }}" target="new"><i
+												<li><a class="counterU" id="button-{{ url.pk}}" href="{{ url.link }}" target="new"><i
 															class="glyphicon glyphicon-eye-open"></i></a></li>
 											</ul>
 										</div>
 									</div>
 								</div>
-
+								<script>
+									$(".counterU").click(function () {
+										var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+										$.ajax({
+											url: "{% url 'ajax_url_views' url.pk %}",
+											data: {
+												'pk': $(this).attr('id')
+											},
+										});
+									});
+								</script>
 								{% endfor %}
 							</div>
-
-
-
-
-
 						</div>
 
 					</div>

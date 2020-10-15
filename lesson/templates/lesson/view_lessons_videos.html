@@ -30,30 +30,29 @@
             {% for video in object_list %}
             <div class="col-lg-4 col-sm-6">
                 <div class="thumbnail" style="box-shadow:1px 1px 6px gray;">
-                    <div class="video-container">
-                        <video controls play style="width: 100%">
-                            <source src="{{video.video.url}}">
-                        </video>
+                    <div class="thumb">
+                        <div class="video-container">
+                            <video style="width:100%;">
+                                <source src="{{video.video.url}}">
+                            </video>
+                        </div>
+                        <div class="caption-overflow">
+                            <span>
+                                <a href="{% url 'view_video' video.pk %}"
+                                    class="counterI btn btn-flat border-white text-white btn-rounded btn-icon"
+                                    data-popup="lightbox"><i class="icon-play4"></i></a>
+                            </span>
+                        </div>
                     </div>
                     <div class="caption">
                         <h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
-                            <a id="button-{{ video.pk}}" href="{% url 'view_lesson' video.lesson.pk %}" class="counter text-muted"><i
+                            <a href="{% url 'view_lesson' video.lesson.pk %}" class="counter text-muted"><i
                                     class="glyphicon glyphicon-eye-open pull-right" style="margin-left:1rem;"></i></a>
                         </h6>
                     </div>
 
                 </div>
             </div>
-            <script>
-                $(".counter").click(function () {
-                    var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
-                    $.ajax({
-                        url: "{% url 'ajax_video_views' video.pk %}",
-                        data: {
-                            'pk': $(this).attr('id')},
-                    });
-                });
-            </script>
             {% endfor %}
         </div>
     </div>

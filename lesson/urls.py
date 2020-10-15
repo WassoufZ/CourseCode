@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^view_lesson/(\d+)/$', views.view_lesson, name="view_lesson"),
 
     url(r'^view_lessons_videos/$', views.VideosView.as_view(), name="view_lessons_videos"),
+    url(r'^view_lessons_videos/play_video/(\d+)/$', views.view_video, name="view_video"),
     url(r'^view_lessons_images/$', views.ImagesView.as_view(), name="view_lessons_images"),
     url(r'^view_lessons_documents/$', views.DocumentsView.as_view(), name="view_lessons_documents"),
 
@@ -37,7 +38,7 @@ urlpatterns = [
     url(r'^ajax/load-subjects/', views.load_subjects, name='ajax_load_subjects'), 
     url(r'^ajax/ajax_document_views/(\d+)/$', views.ajax_document_views, name='ajax_document_views'),
     url(r'^ajax/ajax_image_views/(\d+)/$', views.ajax_image_views, name='ajax_image_views'),
-    url(r'^ajax/ajax_video_views/(\d+)/$', views.ajax_video_views, name='ajax_video_views'),
+    url(r'^ajax/ajax_url_views/(\d+)/$', views.ajax_url_views, name='ajax_url_views'),
 
  
 ]

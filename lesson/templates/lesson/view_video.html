@@ -1,0 +1,72 @@
+{% extends "base_scolarité.html" %}
+{% load i18n %}
+{% load static %}
+
+
+
+{% block title %} Leçon {% endblock %}
+{% block hierarchy %}
+<li><a href="{% url "scolarité_home" %}"><i class="icon-home2 position-left"></i>Accueil</a></li>
+<li><a href="{% url "levels_list" %}">{% trans "Gestion des Niveaux scolaires " %} </a></li>
+
+<li class="active">{% trans "Leçon" %} </li>
+{% endblock %}
+
+{% block content_area %}
+<link href="{% static 'css/leçon.css' %}" rel="stylesheet" type="text/css" />
+
+<div class="row" style="margin-left:0px;">
+    <div>
+        <!-- Basic layout-->
+            <div class="panel panel-flat col-md-8">
+                <div class="row">
+                    <div class="thumbnail" style="margin-bottom: 0px;" >
+                        <div class="video-container">
+                            <video controls play style="width:100%;">
+                                <source src="{{video.video.url}}">
+                            </video>
+                        </div>
+                        </div>
+            </div>
+            <!-- /basic layout -->
+    </div>
+    <div class="col-md-4">
+        <!-- Static mode -->
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title">Additional Info
+                </h4>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Titre:</label>
+                    {{video.title}}
+                    
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Leçon:</label>
+                        <a href="{% url 'view_lesson' video.lesson.pk %}">{{video.lesson}}</a>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+						href="javascript:history.go(-1)" style="width: 100%;"><i class="icon-arrow-left52 position-left"></i>
+						Retour </a>
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- /static mode -->
+    </div>
+</div>
+
+<!--/ success model -->
+
+{% endblock content_area %}

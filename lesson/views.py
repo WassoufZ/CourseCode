@@ -19,7 +19,7 @@ def view_lessons_list(request,subject_id):
     request.session['subject_id']= subject_id                       #assign subject id value to session
     level = Level.objects.get(id=request.session['level_id'])       #getting the level model 
     subject = Subject.objects.get(id=request.session['subject_id']) #getting the subject model 
-    lessons = Lesson.objects.filter(subject=subject ,level=level)   #filtering the lesson based on the chosen level and subject
+    lessons = Lesson.objects.filter(subject=subject ,level=level).order_by('order')  #filtering the lesson based on the chosen level and subject
     context={'lessons':lessons,}
     return render(request,'lesson/view_lessons_list.html',context)
 
@@ -33,14 +33,15 @@ class VideosView(ListView):
         lessons = Lesson.objects.filter(subject=subject ,level=level)
         object_list = Video.objects.filter(lesson__in=lessons)      #filtering the videos that has the same lasson object
         return object_list
-def ajax_video_views(request,pk):
+
+def view_video(request,pk):
     '''if request.user.user_type == 'school_admin':
         pass
     else:'''
     video = Video.objects.get(pk=pk)
     video.views += 1
-    video.save() 
-    return HttpResponse('done')
+    video.save()
+    return render(request,'lesson/view_video.html',{'video':video})
 
 class ImagesView(ListView):
     model = Image
@@ -78,6 +79,14 @@ def ajax_document_views(request,pk):
     document.save() 
     return HttpResponse('done')
 
+def ajax_url_views(request,pk):
+    '''if request.user.user_type == 'school_admin':
+        pass
+    else:'''
+    url = Url.objects.get(pk=pk)
+    url.views += 1
+    url.save() 
+    return HttpResponse('done')
 
 
 class SearchView(ListView):

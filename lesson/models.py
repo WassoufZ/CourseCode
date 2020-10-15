@@ -59,6 +59,7 @@ class Url(models.Model):
     lesson = models.ForeignKey(Lesson,on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
+    views = models.IntegerField(null=True,blank=True,default=0)
     def __str__(self):
         return self.title
 
