@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'users',
     'lesson',
     'crispy_forms',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -202,3 +203,12 @@ STATICFILES_DIRS = (
   
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL ='/media/' 
+
+
+#====== aws3 settings===============
+AWS_ACCESS_KEY_ID = 'AKIA272UMKGOOGTJXR74'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'new-test-django2'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
