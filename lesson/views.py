@@ -19,7 +19,6 @@ def view_lessons_list(request,subject_id):
     request.session['subject_id']= subject_id                       #assign subject id value to session
     level = Level.objects.get(id=request.session['level_id'])       #getting the level model 
     subject = Subject.objects.get(id=request.session['subject_id']) #getting the subject model 
-
     lessons = Lesson.objects.filter(subject=subject ,level=level)   #filtering the lesson based on the chosen level and subject
     context={'lessons':lessons,}
     return render(request,'lesson/view_lessons_list.html',context)
@@ -32,9 +31,16 @@ class VideosView(ListView):
         level = Level.objects.get(id=self.request.session['level_id'])
         subject = Subject.objects.get(id=self.request.session['subject_id'])
         lessons = Lesson.objects.filter(subject=subject ,level=level)
-
         object_list = Video.objects.filter(lesson__in=lessons)      #filtering the videos that has the same lasson object
         return object_list
+def ajax_video_views(request,pk):
+    '''if request.user.user_type == 'school_admin':
+        pass
+    else:'''
+    video = Video.objects.get(pk=pk)
+    video.views += 1
+    video.save() 
+    return HttpResponse('done')
 
 class ImagesView(ListView):
     model = Image
@@ -43,9 +49,16 @@ class ImagesView(ListView):
         level = Level.objects.get(id=self.request.session['level_id'])
         subject = Subject.objects.get(id=self.request.session['subject_id'])
         lessons = Lesson.objects.filter(subject=subject ,level=level)
-
         object_list = Image.objects.filter(lesson__in=lessons)      
         return object_list
+def ajax_image_views(request,pk):
+    '''if request.user.user_type == 'school_admin':
+        pass
+    else:'''
+    image = Image.objects.get(pk=pk)
+    image.views += 1
+    image.save() 
+    return HttpResponse('done')
 
 class DocumentsView(ListView):
     model = Document
@@ -54,9 +67,17 @@ class DocumentsView(ListView):
         level = Level.objects.get(id=self.request.session['level_id'])
         subject = Subject.objects.get(id=self.request.session['subject_id'])
         lessons = Lesson.objects.filter(subject=subject ,level=level)
-
         object_list = Document.objects.filter(lesson__in=lessons)      
         return object_list
+def ajax_document_views(request,pk):
+    '''if request.user.user_type == 'school_admin':
+        pass
+    else:'''
+    document = Document.objects.get(pk=pk)
+    document.views += 1
+    document.save() 
+    return HttpResponse('done')
+
 
 
 class SearchView(ListView):

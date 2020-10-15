@@ -330,6 +330,7 @@
 													<a href="{% url 'edit_lesson_video' lesson.pk video.pk %}"
 														class="text-muted"><i class="icon-pencil5 pull-right"></i></a>
 												</h6>
+												<mark><small><i class="icon-eye2"></i> {{video.views}}</small></mark>
 											</div>
 
 										</div>
@@ -370,6 +371,7 @@
 															class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
 																class="icon-trash"></i></a>  
 													</span>
+													<small><i class="icon-eye2"></i> {{image.views}}</small>
 												</div>
 											</div>
 
@@ -430,6 +432,7 @@
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h6 class="panel-title">{{document.title}}</h6>
+										<mark><small><i class="icon-eye2"></i> {{document.views}}</small></mark>
 										<div class="heading-elements">
 											<ul class="icons-list">
 												<li><a href="{{document.document.url}}" target="new"><i

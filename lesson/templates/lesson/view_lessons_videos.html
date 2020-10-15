@@ -37,13 +37,23 @@
                     </div>
                     <div class="caption">
                         <h6 class="no-margin"><a href="#" class="text-default">{{video.title}}</a>
-                            <a href="{% url 'view_lesson' video.lesson.pk %}" class="text-muted"><i
+                            <a id="button-{{ video.pk}}" href="{% url 'view_lesson' video.lesson.pk %}" class="counter text-muted"><i
                                     class="glyphicon glyphicon-eye-open pull-right" style="margin-left:1rem;"></i></a>
                         </h6>
                     </div>
 
                 </div>
             </div>
+            <script>
+                $(".counter").click(function () {
+                    var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+                    $.ajax({
+                        url: "{% url 'ajax_video_views' video.pk %}",
+                        data: {
+                            'pk': $(this).attr('id')},
+                    });
+                });
+            </script>
             {% endfor %}
         </div>
     </div>

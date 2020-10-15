@@ -32,8 +32,8 @@
             <img src="{{image.image.url}}" alt="" style="height: 15rem;">
             <div class="caption-overflow">
                 <span>
-                    <a href="{{image.image.url}}"
-                        class="btn btn-flat border-white text-white btn-rounded btn-icon"
+                    <a id="button-{{ image.pk}}" href="{{image.image.url}}"
+                        class="counter btn btn-flat border-white text-white btn-rounded btn-icon"
                         data-popup="lightbox"><i class="icon-zoomin3"></i></a>
                     <a href="{% url 'view_lesson' image.lesson.pk %}"
                         class="btn btn-flat border-white text-white btn-rounded btn-icon"><i
@@ -46,6 +46,17 @@
         </div>
     </div>
 </div>
+<!-- counter -->
+<script>
+	$(".counter").click(function () {
+		var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+		$.ajax({
+			url: "{% url 'ajax_image_views' image.pk %}",
+			data: {
+				'pk': $(this).attr('id')},
+		});
+	});
+</script>
 {% endfor %}
 </div>
 

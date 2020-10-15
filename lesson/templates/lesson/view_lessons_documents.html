@@ -10,18 +10,19 @@
 
 {% block content_area %}
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-flat">
-            <div class="panel-heading">
-                <h4 class="panel-title"> {% trans "documents" %} : <a href="javascript:history.go(-1)"><i class="icon-list2"></i></a></h4>
-                <div class="heading-elements">
-		        	<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple" 
-		        		href="javascript:history.go(-1)" 
-		            ><i class="icon-arrow-left52 position-left"></i> {% trans "Retour" %}   </a>	        	
-		    	</div>
-            </div>
-        </div>
-    </div>
+	<div class="col-md-12">
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h4 class="panel-title"> {% trans "documents" %} : <a href="javascript:history.go(-1)"><i
+							class="icon-list2"></i></a></h4>
+				<div class="heading-elements">
+					<a class="btn btn-xs bg-pink-400 btn-raised heading-btn legitRipple"
+						href="javascript:history.go(-1)"><i class="icon-arrow-left52 position-left"></i>
+						{% trans "Retour" %} </a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% for document in object_list %}
 <!-- Multiple icons -->
@@ -30,13 +31,24 @@
 		<h6 class="panel-title">{{ document.title }}</h6>
 		<div class="heading-elements">
 			<ul class="icons-list">
-				<li><a href="{% url 'view_lesson' document.lesson.pk %}"><i class="glyphicon glyphicon-eye-open"></i></a></li>
-				<li><a href="{{document.document.url}}" target="new"><i class="icon-download4"></i></a></li>
+				<li><a href="{% url 'view_lesson' document.lesson.pk %}"><i
+							class="glyphicon glyphicon-eye-open"></i></a></li>
+				<li><a class="counter" id="button-{{ document.pk}}" href="{{document.document.url}}" target="new"><i
+							class="icon-download4"></i></a></li>
 			</ul>
 		</div>
 	</div>
 </div>
-<!-- /multiple icons -->
+<!-- counter -->
+<script>
+	$(".counter").click(function () {
+		var postData = { csrfmiddlewaretoken: '{{ csrf_token }}' }
+		$.ajax({
+			url: "{% url 'ajax_document_views' document.pk %}",
+			data: {
+				'pk': $(this).attr('id')},
+		});
+	});
+</script>
 {% endfor %}
-
 {% endblock content_area %}

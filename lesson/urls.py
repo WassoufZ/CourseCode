@@ -31,6 +31,13 @@ urlpatterns = [
     url(r'^delete_lesson_url/(\d+)/$', views.delete_lesson_url, name="delete_lesson_url"),
 
     url(r'^globalform/', views.GlobalLessonView.as_view(), name='globalform'),
-    url(r'^ajax/load-subjects/', views.load_subjects, name='ajax_load_subjects'), # AJAX
+
+              #===================== Ajax =====================================
+
+    url(r'^ajax/load-subjects/', views.load_subjects, name='ajax_load_subjects'), 
+    url(r'^ajax/ajax_document_views/(\d+)/$', views.ajax_document_views, name='ajax_document_views'),
+    url(r'^ajax/ajax_image_views/(\d+)/$', views.ajax_image_views, name='ajax_image_views'),
+    url(r'^ajax/ajax_video_views/(\d+)/$', views.ajax_video_views, name='ajax_video_views'),
+
  
 ]
